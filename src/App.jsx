@@ -96,4 +96,4 @@ export default function App() {
               <img 
                 src={p.image} 
                 alt={p.title} 
-                s
+              
