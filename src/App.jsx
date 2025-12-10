@@ -21,7 +21,7 @@ export default function App() {
 }
 
 // ----------------------------------------------------
-// Navigation
+// Navigation (Header) — OHNE Impressum / Datenschutz
 // ----------------------------------------------------
 function Navigation() {
   const { dark, setDark } = useContext(ThemeContext);
@@ -88,16 +88,13 @@ function Navigation() {
   return (
     <header style={headerBar}>
       <div style={navContainer}>
+
         {/* Linke Seite */}
         <div style={leftNav}>
           <Link to="/" style={logoLink}>White Label Checker</Link>
 
           <Link to="/" style={navItem}>Startseite</Link>
           <Link to="/info" style={navItem}>Info</Link>
-
-          {/* Neue Links */}
-          <Link to="/impressum" style={navItem}>Impressum</Link>
-          <Link to="/datenschutz" style={navItem}>Datenschutz</Link>
 
           <a
             href="https://www.amazon.de/?tag=whitelabelche-21"
@@ -108,7 +105,7 @@ function Navigation() {
           </a>
         </div>
 
-        {/* Rechte Seite */}
+        {/* Darkmode rechts */}
         <button onClick={() => setDark(!dark)} style={toggleBtn}>
           {dark ? "☀️ Hell" : "🌙 Dunkel"}
         </button>
@@ -134,7 +131,7 @@ function MainContent() {
 }
 
 // ----------------------------------------------------
-// Footer
+// Footer (Impressum + Datenschutz NUR HIER)
 // ----------------------------------------------------
 function Footer() {
   const { dark } = useContext(ThemeContext);
