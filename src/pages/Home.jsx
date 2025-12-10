@@ -31,8 +31,8 @@ export default function Home() {
 
   const amazonButton = {
     padding: "10px 16px",
-    background: "white",
-    color: "#0070f3",
+    background: "#ff9900",
+    color: "black",
     fontWeight: "bold",
     borderRadius: "8px",
     cursor: "pointer",
@@ -49,22 +49,6 @@ export default function Home() {
     marginBottom: "25px"
   };
 
-  const headerTitle = {
-    fontSize: "34px",
-    fontWeight: "bold",
-    margin: 0
-  };
-
-  const headerSubtitle = {
-    fontSize: "18px",
-    opacity: 0.95,
-    marginTop: "12px",
-    maxWidth: "700px",
-    marginLeft: "auto",
-    marginRight: "auto",
-    lineHeight: "1.4"
-  };
-
   const formStyle = {
     display: "flex",
     gap: "10px",
@@ -72,19 +56,38 @@ export default function Home() {
     marginTop: "25px"
   };
 
+  // Card Design
   const cardGrid = {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-    gap: "20px"
+    gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+    gap: "25px",
+    padding: "20px"
   };
 
   const cardStyle = {
-    border: "1px solid #ddd",
-    borderRadius: "10px",
-    padding: "15px",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-    textAlign: "center",
-    background: "white"
+    borderRadius: "14px",
+    padding: "18px",
+    background: "white",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+    transition: "0.25s",
+    position: "relative"
+  };
+
+  const cardHover = {
+    transform: "translateY(-4px)",
+    boxShadow: "0 8px 20px rgba(0,0,0,0.15)"
+  };
+
+  const wlBadge = {
+    position: "absolute",
+    top: "12px",
+    right: "12px",
+    background: "rgba(255,0,0,0.85)",
+    color: "white",
+    borderRadius: "6px",
+    padding: "4px 8px",
+    fontSize: "12px",
+    fontWeight: "bold"
   };
 
   const infoIcon = {
@@ -132,16 +135,14 @@ export default function Home() {
 
       {/* Header */}
       <div style={headerStyle}>
-        <h1 style={headerTitle}>White Label Checker</h1>
-        <p style={headerSubtitle}>
-          Viele Produkte auf Amazon stammen aus derselben Fabrik in China – und 
-          werden nur mit einem Fantasienamen versehen. Diese White-Label-Produkte 
-          wirken wie Marken, sind aber oft minderwertig.
-          <br />
-          <strong>Unsere Suche hilft dir, solche Produkte zu erkennen.</strong>
+        <h1 style={{ fontSize: "34px", fontWeight: "bold" }}>White Label Checker</h1>
+
+        <p style={{ maxWidth: "700px", margin: "10px auto", opacity: 0.95 }}>
+          Viele Produkte auf Amazon stammen aus derselben Fabrik in China – und werden nur mit einem Fantasienamen versehen.
+          Unsere Suche hilft dir, solche Produkte zu erkennen.
         </p>
 
-        {/* Suchfeld */}
+        {/* Search Bar */}
         <form onSubmit={handleSearch} style={formStyle}>
           <input 
             value={query}
@@ -193,16 +194,12 @@ export default function Home() {
         </span>
       </div>
 
-      {/* Popup */}
+      {/* Info Box */}
       {showInfo && (
         <div style={infoPopup}>
           <strong>Was ist ein White-Label-Produkt?</strong>
           <br /><br />
-          Ein White-Label-Produkt ist ein No-Name-Artikel, der von einer 
-          Fabrik produziert und von vielen Händlern mit verschiedenen 
-          Fantasienamen verkauft wird.
-          <br /><br />
-          Diese Seite hilft dir, solche Produkte zu erkennen.
+          Ein White-Label-Produkt wird von einer Fabrik hergestellt und von vielen Händlern unter verschiedenen Markennamen verkauft.
           <br /><br />
           <button 
             onClick={() => setShowInfo(false)}
@@ -222,35 +219,55 @@ export default function Home() {
         </div>
       )}
 
+      {/* Results */}
       {loading && <p style={{ textAlign: "center" }}>Suche läuft...</p>}
 
-      {/* Ergebnisse */}
-      <div style={{ padding: "20px" }}>
-        <div style={cardGrid}>
-          {products
-            .filter(p => !hideWL || !isWhiteLabel(p.brand))
-            .map((p, i) => (
-              <div key={i} style={cardStyle}>
-                <img 
-                  src={p.image} 
-                  alt={p.title} 
-                  style={{ width: "100%", borderRadius: "8px" }}
-                />
+      <div style={cardGrid}>
+        {products
+          .filter(p => !hideWL || !isWhiteLabel(p.brand))
+          .map((p, i) => (
+            <div 
+              key={i} 
+              style={cardStyle}
+              onMouseEnter={e => Object.assign(e.currentTarget.style, cardHover)}
+              onMouseLeave={e => Object.assign(e.currentTarget.style, cardStyle)}
+            >
+              {/* WL Badge */}
+              {isWhiteLabel(p.brand) && (
+                <div style={wlBadge}>WL</div>
+              )}
 
-                <h3>{p.title}</h3>
-                <p><strong>{p.brand}</strong></p>
+              <img 
+                src={p.image} 
+                alt={p.title} 
+                style={{ width: "100%", borderRadius: "10px" }}
+              />
 
-                {isWhiteLabel(p.brand) && (
-                  <p style={{ color: "red", fontWeight: "bold" }}>
-                    (White-Label erkannt)
-                  </p>
-                )}
+              <h3 style={{ marginTop: "10px", fontSize: "18px" }}>{p.title}</h3>
+              <p style={{ opacity: 0.7 }}>{p.brand}</p>
 
-                <p>Preis: {p.price} €</p>
-              </div>
-            ))
-          }
-        </div>
+              <p style={{ fontSize: "20px", fontWeight: "bold" }}>{p.price} €</p>
+
+              <a 
+                href="https://www.amazon.de"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button style={{
+                  marginTop: "10px",
+                  padding: "10px 16px",
+                  background: "#ff9900",
+                  border: "none",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                  fontWeight: "bold"
+                }}>
+                  Auf Amazon ansehen
+                </button>
+              </a>
+            </div>
+          ))
+        }
       </div>
 
     </div>
