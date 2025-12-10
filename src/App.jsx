@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { searchAmazonMock } from './api/mockAmazon'
 
 export default function App() {
   const [query, setQuery] = useState('');
   const [products, setProducts] = useState([]);
   const [hideWL, setHideWL] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function isWhiteLabel(name) {
     if (!name) return false;
@@ -12,20 +14,17 @@ export default function App() {
     return weird || hasNum;
   }
 
-  const mockData = [
-    { title: "Bosch Professional Bohrmaschine", brand: "Bosch" },
-    { title: "XGHJY Powerbank 30000mAh", brand: "XGHJY" },
-    { title: "Philips Elektrorasierer Series 3000", brand: "Philips" },
-    { title: "JYTK9 USB-C Kabel", brand: "JYTK9" }
-  ];
-
-  function handleSearch() {
-    setProducts(mockData);
+  async function handleSearch() {
+    setLoading(true);
+    const results = await searchAmazonMock(query);
+    setProducts(results);
+    setLoading(false);
   }
 
   return (
     <div style={{ fontFamily: 'Arial', padding: 20 }}>
       <h1>White Label Checker MVP</h1>
+
       <input 
         value={query} 
         onChange={e => setQuery(e.target.value)} 
@@ -44,15 +43,23 @@ export default function App() {
         </label>
       </div>
 
+      {loading && <p>Suche läuft...</p>}
+
       <h2>Ergebnisse:</h2>
-      <ul>
+
+      <ul style={{ listStyle: "none", padding: 0 }}>
         {products
           .filter(p => !hideWL || !isWhiteLabel(p.brand))
           .map((p, i) => (
-          <li key={i}>
-            <strong>{p.title}</strong> — {p.brand}{" "}
-            {isWhiteLabel(p.brand) && <span style={{color:"red"}}>(White-Label)</span>}
-          </li>
+            <li key={i} style={{ marginBottom: 20 }}>
+              <img src={p.image} alt="" width="120" /><br />
+              <strong>{p.title}</strong><br />
+              {p.brand}{" "}
+              {isWhiteLabel(p.brand) && (
+                <span style={{color:"red"}}>(White-Label)</span>
+              )}
+              <div>Preis: {p.price} €</div>
+            </li>
         ))}
       </ul>
     </div>
