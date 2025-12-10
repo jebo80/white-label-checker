@@ -6,6 +6,7 @@ export default function App() {
   const [products, setProducts] = useState([]);
   const [hideWL, setHideWL] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showInfo, setShowInfo] = useState(false); // NEW: Popup state
 
   function isWhiteLabel(name) {
     if (!name) return false;
@@ -21,6 +22,10 @@ export default function App() {
     setProducts(results);
     setLoading(false);
   }
+
+  // =======================
+  // STYLES
+  // =======================
 
   const topBar = {
     display: "flex",
@@ -85,10 +90,42 @@ export default function App() {
     background: "white"
   };
 
-  return (
-    <div>
+  // Popup Styling
+  const infoPopup = {
+    position: "absolute",
+    background: "white",
+    padding: "15px",
+    borderRadius: "8px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+    width: "260px",
+    right: "50%", 
+    transform: "translateX(50%)",
+    top: "180px",
+    zIndex: 10,
+    fontSize: "14px",
+    lineHeight: "1.4"
+  };
 
-      {/* AMAZON BUTTON OBEN RECHTS */}
+  const infoIcon = {
+    display: "inline-block",
+    width: "22px",
+    height: "22px",
+    borderRadius: "50%",
+    background: "#0070f3",
+    color: "white",
+    textAlign: "center",
+    lineHeight: "22px",
+    cursor: "pointer",
+    marginLeft: "8px",
+    fontWeight: "bold"
+  };
+
+  // =======================
+
+  return (
+    <div style={{ position: "relative" }}>
+
+      {/* AMAZON BUTTON */}
       <div style={topBar}>
         <a 
           href="https://www.amazon.de/?tag=whitelabelche-21"
@@ -106,7 +143,7 @@ export default function App() {
         <p style={headerSubtitle}>
           Viele Produkte auf Amazon stammen aus derselben Fabrik in China – und 
           werden nur mit einem Fantasienamen versehen. Diese White-Label-Produkte 
-          wirken wie Marken, sind aber oft minderwertig. 
+          wirken wie Marken, sind aber oft minderwertig.
           <br />
           <strong>Unsere Suche hilft dir, solche Produkte zu erkennen.</strong>
         </p>
@@ -144,7 +181,7 @@ export default function App() {
         </form>
       </div>
 
-      {/* FILTER */}
+      {/* FILTER + INFO ICON */}
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
         <label style={{ display: "inline-flex", gap: "8px", alignItems: "center" }}>
           <input 
@@ -154,7 +191,44 @@ export default function App() {
           />
           White-Label-Produkte ausblenden
         </label>
+
+        {/* INFO ICON */}
+        <span 
+          style={infoIcon}
+          onClick={() => setShowInfo(!showInfo)}
+        >
+          i
+        </span>
       </div>
+
+      {/* POPUP */}
+      {showInfo && (
+        <div style={infoPopup}>
+          <strong>Was ist ein White-Label-Produkt?</strong>
+          <br /><br />
+          Ein White-Label-Produkt ist ein No-Name-Artikel, der von einer 
+          Fabrik produziert und von vielen Händlern mit verschiedenen 
+          Fantasienamen verkauft wird.
+          <br /><br />
+          Diese Seite hilft dir, solche Produkte zu erkennen.
+          <br /><br />
+          <button 
+            onClick={() => setShowInfo(false)}
+            style={{
+              marginTop: "5px",
+              width: "100%",
+              padding: "6px",
+              borderRadius: "6px",
+              border: "none",
+              background: "#0070f3",
+              color: "white",
+              cursor: "pointer"
+            }}
+          >
+            Schließen
+          </button>
+        </div>
+      )}
 
       {loading && <p style={{ textAlign: "center" }}>Suche läuft...</p>}
 
