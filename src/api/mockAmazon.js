@@ -6,30 +6,31 @@ export async function searchAmazonMock(query) {
   await new Promise((resolve) => setTimeout(resolve, 500));
 
   // Beispiel-Daten (können wir später beliebig erweitern)
-  return [
+    return [
     {
       title: "Bosch Professional Schlagbohrmaschine",
       brand: "Bosch",
       price: "89.99",
-      image: "https://m.media-amazon.com/images/I/71xKzVsy7fL._AC_SX425_.jpg"
+      image: "https://via.placeholder.com/150?text=Bosch"
     },
     {
       title: "XGHJY Powerbank 30000mAh",
       brand: "XGHJY",
       price: "24.99",
-      image: "https://m.media-amazon.com/images/I/61pN5z9YtZL._AC_SX425_.jpg"
+      image: "https://via.placeholder.com/150?text=Powerbank"
     },
     {
       title: "Philips Rasierer Series 3000",
       brand: "Philips",
       price: "49.99",
-      image: "https://m.media-amazon.com/images/I/71wJuaZyKXL._AC_SX425_.jpg"
+      image: "https://via.placeholder.com/150?text=Philips"
     },
     {
       title: "JYTK9 USB-C Schnellladekabel",
       brand: "JYTK9",
       price: "6.99",
-      image: "https://m.media-amazon.com/images/I/51o1eKZx8CL._AC_SX425_.jpg"
+      image: "https://via.placeholder.com/150?text=USB-C"
     }
   ];
+
 }
