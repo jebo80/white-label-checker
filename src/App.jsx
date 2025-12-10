@@ -96,4 +96,21 @@ export default function App() {
               <img 
                 src={p.image} 
                 alt={p.title} 
-              
+                style={{ width: "100%", borderRadius: "8px" }}
+              />
+              <h3>{p.title}</h3>
+              <p><strong>{p.brand}</strong></p>
+
+              {isWhiteLabel(p.brand) && (
+                <p style={{ color: "red", fontWeight: "bold" }}>
+                  (White-Label erkannt)
+                </p>
+              )}
+
+              <p>Preis: {p.price} €</p>
+            </div>
+        ))}
+      </div>
+    </div>
+  );
+}
