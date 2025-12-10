@@ -7,11 +7,23 @@ export default function App() {
   return (
     <Router>
 
-      {/* NAVIGATION */}
-      <nav style={navStyle}>
-        <Link to="/" style={linkStyle}>Startseite</Link>
-        <Link to="/info" style={linkStyle}>Was sind White-Label-Produkte?</Link>
-      </nav>
+      {/* MODERNE NAVIGATION */}
+      <header style={headerBar}>
+        <div style={navContainer}>
+
+          {/* LOGO / BRAND */}
+          <div style={logoStyle}>
+            <Link to="/" style={logoLink}>White Label Checker</Link>
+          </div>
+
+          {/* NAVIGATION LINKS */}
+          <nav style={navLinks}>
+            <Link to="/" style={navItem}>Startseite</Link>
+            <Link to="/info" style={navItem}>Info</Link>
+          </nav>
+
+        </div>
+      </header>
 
       {/* INHALT */}
       <div style={{ minHeight: "70vh" }}>
@@ -44,25 +56,51 @@ export default function App() {
   );
 }
 
-// =====================
-// Styles
-// =====================
+/* ============================
+   Styles
+============================ */
 
-const navStyle = {
-  display: "flex",
-  justifyContent: "center",
-  gap: "30px",
-  padding: "15px",
-  background: "#f3f3f3",
-  borderBottom: "1px solid #ddd",
-  fontSize: "18px"
+const headerBar = {
+  background: "#ffffff",
+  borderBottom: "1px solid #e0e0e0",
+  padding: "12px 0",
+  position: "sticky",
+  top: 0,
+  zIndex: 50
 };
 
-const linkStyle = {
-  textDecoration: "none",
-  color: "#0070f3",
+const navContainer = {
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "0 20px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between"
+};
+
+const logoStyle = {
+  fontSize: "22px",
   fontWeight: "bold"
 };
+
+const logoLink = {
+  textDecoration: "none",
+  color: "#0070f3"
+};
+
+const navLinks = {
+  display: "flex",
+  gap: "25px"
+};
+
+const navItem = {
+  textDecoration: "none",
+  color: "#333",
+  fontSize: "17px",
+  fontWeight: "500"
+};
+
+/* Footer Styles */
 
 const footerStyle = {
   marginTop: "50px",
