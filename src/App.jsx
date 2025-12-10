@@ -14,7 +14,8 @@ export default function App() {
     return weird || hasNum;
   }
 
-  async function handleSearch() {
+  async function handleSearch(e) {
+    if (e) e.preventDefault(); // verhindert Form-Reload
     setLoading(true);
     const results = await searchAmazonMock(query);
     setProducts(results);
@@ -54,21 +55,17 @@ export default function App() {
     <div style={pageStyle}>
       <h1 style={{ textAlign: "center" }}>White Label Checker MVP</h1>
 
-      <div style={searchArea}>
+      {/* FORM ELEMENT → ENTER FUNKTIONIERT AUTOMATISCH */}
+      <form onSubmit={handleSearch} style={searchArea}>
         <input 
           value={query}
           onChange={e => setQuery(e.target.value)}
-          onKeyDown={e => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
           placeholder="Amazon Produkt suchen..."
           style={{ flex: 1, padding: "10px", fontSize: "16px" }}
         />
 
         <button 
-          onClick={handleSearch}
+          type="submit"
           style={{
             padding: "10px 20px",
             fontSize: "16px",
@@ -81,7 +78,7 @@ export default function App() {
         >
           Suchen
         </button>
-      </div>
+      </form>
 
       <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
         <input 
