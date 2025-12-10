@@ -1,169 +1,171 @@
+import React, { useState } from "react";
 import Impressum from "./Impressum";
 import Datenschutz from "./Datenschutz";
-import React, { useContext } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import Info from "./pages/Info";
-import { ThemeProvider, ThemeContext } from "./ThemeContext";
 
 export default function App() {
-  return (
-    <ThemeProvider>
-      <Router>
-        <Navigation />
-        <MainContent />
-        <Footer />
-      </Router>
-    </ThemeProvider>
-  );
-}
+  const [page, setPage] = useState("home");
+  const [query, setQuery] = useState("");
+  const [products, setProducts] = useState([]);
+  const [hideWL, setHideWL] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
-// ----------------------------------------------------
-// Navigation
-// ----------------------------------------------------
-function Navigation() {
-  const { dark, setDark } = useContext(ThemeContext);
+  const pageStyle = {
+    fontFamily: "Arial, sans-serif",
+    padding: "20px",
+    maxWidth: "900px",
+    margin: "120px auto 50px auto", // Platz unter Header
+    color: darkMode ? "white" : "black",
+    minHeight: "60vh",
+  };
 
-  const headerBar = {
-    background: dark ? "#222" : "#ffffff",
-    borderBottom: dark ? "1px solid #333" : "1px solid #e0e0e0",
-    padding: "12px 0",
-    position: "sticky",
+  async function handleSearch() {
+    setLoading(true);
+    const results = []; // DEINE SEARCH-FUNKTION EINSETZEN
+    setProducts(results);
+    setLoading(false);
+  }
+
+  function renderPage() {
+    if (page === "home") {
+      return (
+        <>
+          <h1 style={{ textAlign: "center" }}>siebmaldurch.de</h1>
+
+          <div style={{ marginBottom: "15px", display: "flex", gap: "10px" }}>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              placeholder="Amazon Produkt suchen…"
+              style={{ flex: 1, padding: "10px", fontSize: "16px" }}
+            />
+            <button
+              onClick={handleSearch}
+              style={{
+                padding: "10px 20px",
+                fontSize: "16px",
+                background: "#0070f3",
+                color: "white",
+                border: "none",
+                borderRadius: "6px",
+              }}
+            >
+              Suchen
+            </button>
+          </div>
+
+          <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <input
+              type="checkbox"
+              checked={hideWL}
+              onChange={() => setHideWL(!hideWL)}
+            />
+            White-Label-Produkte ausblenden
+          </label>
+
+          {loading && <p>Suche läuft…</p>}
+
+          <div style={{ marginTop: "20px" }}>
+            {products.map((p) => (
+              <div key={p.title}>{p.title}</div>
+            ))}
+          </div>
+        </>
+      );
+    }
+
+    if (page === "info") {
+      return (
+        <>
+          <h1>Was macht siebmaldurch.de?</h1>
+          <p>
+            Diese Seite hilft dir, White-Label-Produkte zu erkennen und seriöse
+            Marken von Fantasienamen zu unterscheiden.
+          </p>
+        </>
+      );
+    }
+
+    if (page === "impressum") return <Impressum />;
+    if (page === "datenschutz") return <Datenschutz />;
+
+    return null;
+  }
+
+  const headerStyle = {
+    position: "fixed",
     top: 0,
-    zIndex: 200,
-    transition: "0.3s"
-  };
-
-  const navContainer = {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "0 20px",
+    left: 0,
+    width: "100%",
+    padding: "15px 20px",
+    background: darkMode ? "#222" : "#f4f4f4",
+    borderBottom: "1px solid #ccc",
     display: "flex",
-    alignItems: "center"
-  };
-
-  const leftNav = {
-    display: "flex",
+    justifyContent: "space-between",
     alignItems: "center",
-    gap: "20px"
+    zIndex: 1000,
   };
 
-  const logoLink = {
-    textDecoration: "none",
-    color: dark ? "#58a6ff" : "#0070f3",
-    fontSize: "22px",
-    fontWeight: "bold",
-    marginRight: "25px"
-  };
-
-  const navItem = {
-    textDecoration: "none",
-    color: dark ? "#ddd" : "#333",
-    fontSize: "17px",
-    fontWeight: "500"
-  };
-
-  const amazonBtn = {
-    padding: "8px 14px",
-    background: "#ff9900",
-    borderRadius: "6px",
-    color: "black",
-    fontWeight: "bold",
-    border: "none",
-    cursor: "pointer"
-  };
-
-  const toggleBtn = {
-    padding: "6px 14px",
-    background: dark ? "#444" : "#eee",
-    borderRadius: "6px",
-    border: "none",
+  const navStyle = {
+    display: "flex",
+    gap: "20px",
+    fontSize: "18px",
     cursor: "pointer",
-    color: dark ? "white" : "black",
-    marginLeft: "auto" // 🔥 Schiebt ihn ganz nach rechts
   };
-
-  return (
-    <header style={headerBar}>
-      <div style={navContainer}>
-
-        {/* Linke Seite */}
-        <div style={leftNav}>
-          <Link to="/" style={logoLink}>White Label Checker</Link>
-
-          <Link to="/" style={navItem}>Startseite</Link>
-          <Link to="/info" style={navItem}>Info</Link>
-
-          <a
-            href="https://www.amazon.de/?tag=whitelabelche-21"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button style={amazonBtn}>Amazon</button>
-          </a>
-        </div>
-
-        {/* Rechte Seite */}
-        <button onClick={() => setDark(!dark)} style={toggleBtn}>
-          {dark ? "☀️ Hell" : "🌙 Dunkel"}
-        </button>
-
-      </div>
-    </header>
-  );
-}
-
-// ----------------------------------------------------
-// Main content
-// ----------------------------------------------------
-function MainContent() {
-  return (
-    <div style={{ minHeight: "70vh" }}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/info" element={<Info />} />
-      </Routes>
-    </div>
-  );
-}
-
-// ----------------------------------------------------
-// Footer
-// ----------------------------------------------------
-function Footer() {
-  const { dark } = useContext(ThemeContext);
 
   const footerStyle = {
-    marginTop: "50px",
-    padding: "30px 20px",
-    background: dark ? "#1f1f1f" : "#f3f3f3",
-    borderTop: dark ? "1px solid #333" : "1px solid #ddd",
     textAlign: "center",
-    transition: "0.3s"
-  };
-
-  const link = {
-    textDecoration: "none",
-    color: dark ? "#58a6ff" : "#0070f3",
-    fontWeight: "bold"
+    padding: "20px",
+    marginTop: "40px",
+    borderTop: "1px solid #ccc",
   };
 
   return (
-    <footer style={footerStyle}>
-      <h3>White Label Checker</h3>
+    <div style={{ background: darkMode ? "#111" : "white" }}>
+      {/* Header */}
+      <header style={headerStyle}>
+        <nav style={navStyle}>
+          <span onClick={() => setPage("home")}>Startseite</span>
+          <span onClick={() => setPage("info")}>Info</span>
+          <span onClick={() => setPage("impressum")}>Impressum</span>
+          <span onClick={() => setPage("datenschutz")}>Datenschutz</span>
+        </nav>
 
-      <p style={{ opacity: 0.8 }}>
-        Finde echte Marken – vermeide White-Label-Produkte.
-      </p>
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          style={{
+            padding: "8px 14px",
+            background: darkMode ? "#444" : "#0070f3",
+            color: "white",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          {darkMode ? "Hell" : "Dunkel"}
+        </button>
+      </header>
 
-      <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
-        <Link to="/" style={link}>Startseite</Link>
-        <Link to="/info" style={link}>Info-Seite</Link>
-      </div>
+      {/* Inhaltsbereich */}
+      <main style={pageStyle}>{renderPage()}</main>
 
-      <p style={{ marginTop: "15px", opacity: 0.7 }}>
-        © {new Date().getFullYear()} White Label Checker
-      </p>
-    </footer>
+      {/* Footer */}
+      <footer style={footerStyle}>
+        <span
+          style={{ cursor: "pointer" }}
+          onClick={() => setPage("impressum")}
+        >
+          Impressum
+        </span>{" "}
+        |{" "}
+        <span
+          style={{ cursor: "pointer" }}
+          onClick={() => setPage("datenschutz")}
+        >
+          Datenschutz
+        </span>
+      </footer>
+    </div>
   );
 }
