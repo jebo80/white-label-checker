@@ -21,47 +21,79 @@ export default function App() {
     setLoading(false);
   }
 
+  const pageStyle = {
+    fontFamily: "Arial, sans-serif",
+    padding: "20px",
+    maxWidth: "900px",
+    margin: "auto"
+  };
+
+  const searchArea = {
+    display: "flex",
+    gap: "10px",
+    marginBottom: "15px"
+  };
+
+  const cardGrid = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+    gap: "20px",
+    marginTop: "20px"
+  };
+
+  const cardStyle = {
+    border: "1px solid #ddd",
+    borderRadius: "10px",
+    padding: "15px",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+    textAlign: "center",
+    background: "white"
+  };
+
   return (
-    <div style={{ fontFamily: 'Arial', padding: 20 }}>
-      <h1>White Label Checker MVP</h1>
+    <div style={pageStyle}>
+      <h1 style={{ textAlign: "center" }}>White Label Checker MVP</h1>
 
-      <input 
-        value={query} 
-        onChange={e => setQuery(e.target.value)} 
-        placeholder="Amazon Produkt suchen..."
-      />
-      <button onClick={handleSearch}>Suchen</button>
-
-      <div style={{ marginTop: 10 }}>
-        <label>
-          <input 
-            type="checkbox" 
-            checked={hideWL} 
-            onChange={() => setHideWL(!hideWL)} 
-          />
-          White-Label-Produkte ausblenden
-        </label>
+      <div style={searchArea}>
+        <input 
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          placeholder="Amazon Produkt suchen..."
+          style={{ flex: 1, padding: "10px", fontSize: "16px" }}
+        />
+        <button 
+          onClick={handleSearch}
+          style={{
+            padding: "10px 20px",
+            fontSize: "16px",
+            cursor: "pointer",
+            background: "#0070f3",
+            color: "white",
+            border: "none",
+            borderRadius: "6px"
+          }}
+        >
+          Suchen
+        </button>
       </div>
+
+      <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <input 
+          type="checkbox" 
+          checked={hideWL} 
+          onChange={() => setHideWL(!hideWL)} 
+        />
+        White-Label-Produkte ausblenden
+      </label>
 
       {loading && <p>Suche läuft...</p>}
 
-      <h2>Ergebnisse:</h2>
-
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <div style={cardGrid}>
         {products
           .filter(p => !hideWL || !isWhiteLabel(p.brand))
           .map((p, i) => (
-            <li key={i} style={{ marginBottom: 20 }}>
-              <img src={p.image} alt="" width="120" /><br />
-              <strong>{p.title}</strong><br />
-              {p.brand}{" "}
-              {isWhiteLabel(p.brand) && (
-                <span style={{color:"red"}}>(White-Label)</span>
-              )}
-              <div>Preis: {p.price} €</div>
-            </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+            <div key={i} style={cardStyle}>
+              <img 
+                src={p.image} 
+                alt={p.title} 
+                s
