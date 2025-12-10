@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { searchAmazonMock } from '../api/mockAmazon'
+import { ThemeContext } from '../ThemeContext'
 
 export default function Home() {
+  const { dark } = useContext(ThemeContext);
+
   const [query, setQuery] = useState('');
   const [products, setProducts] = useState([]);
   const [hideWL, setHideWL] = useState(false);
@@ -23,10 +26,23 @@ export default function Home() {
     setLoading(false);
   }
 
-  const topBar = {
-    display: "flex",
-    justifyContent: "flex-end",
-    padding: "10px 20px"
+  // ----------------------------
+  // Styles abhängig vom Darkmode
+  // ----------------------------
+
+  const pageBg = dark ? "#1a1a1a" : "#f5f5f5";
+  const textColor = dark ? "#eaeaea" : "#222";
+
+  const headerStyle = {
+    background: dark
+      ? "linear-gradient(135deg, #0d47a1, #1565c0)"
+      : "linear-gradient(135deg, #0070f3, #3291ff)",
+    padding: "40px 20px 60px 20px",
+    color: "white",
+    textAlign: "center",
+    borderRadius: "0 0 25px 25px",
+    marginBottom: "25px",
+    transition: "0.3s"
   };
 
   const amazonButton = {
@@ -40,23 +56,6 @@ export default function Home() {
     boxShadow: "0 2px 5px rgba(0,0,0,0.15)"
   };
 
-  const headerStyle = {
-    background: "linear-gradient(135deg, #0070f3, #3291ff)",
-    padding: "40px 20px 60px 20px",
-    color: "white",
-    textAlign: "center",
-    borderRadius: "0 0 25px 25px",
-    marginBottom: "25px"
-  };
-
-  const formStyle = {
-    display: "flex",
-    gap: "10px",
-    justifyContent: "center",
-    marginTop: "25px"
-  };
-
-  // Card Design
   const cardGrid = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
@@ -67,22 +66,27 @@ export default function Home() {
   const cardStyle = {
     borderRadius: "14px",
     padding: "18px",
-    background: "white",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+    background: dark ? "#2a2a2a" : "white",
+    color: textColor,
+    boxShadow: dark
+      ? "0 4px 12px rgba(0,0,0,0.35)"
+      : "0 4px 12px rgba(0,0,0,0.08)",
     transition: "0.25s",
     position: "relative"
   };
 
   const cardHover = {
     transform: "translateY(-4px)",
-    boxShadow: "0 8px 20px rgba(0,0,0,0.15)"
+    boxShadow: dark
+      ? "0 8px 20px rgba(0,0,0,0.45)"
+      : "0 8px 20px rgba(0,0,0,0.15)"
   };
 
   const wlBadge = {
     position: "absolute",
     top: "12px",
     right: "12px",
-    background: "rgba(255,0,0,0.85)",
+    background: "rgba(255,60,60,0.9)",
     color: "white",
     borderRadius: "6px",
     padding: "4px 8px",
@@ -106,24 +110,31 @@ export default function Home() {
 
   const infoPopup = {
     position: "absolute",
-    background: "white",
+    background: dark ? "#2d2d2d" : "white",
     padding: "15px",
     borderRadius: "8px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+    boxShadow: dark
+      ? "0 4px 12px rgba(0,0,0,0.4)"
+      : "0 4px 12px rgba(0,0,0,0.2)",
     width: "260px",
-    right: "50%", 
+    right: "50%",
     transform: "translateX(50%)",
     top: "200px",
     zIndex: 10,
     fontSize: "14px",
-    lineHeight: "1.4"
+    lineHeight: "1.4",
+    color: textColor
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ background: pageBg, minHeight: "100%", paddingBottom: "30px", transition: "0.3s" }}>
 
-      {/* Amazon Button */}
-      <div style={topBar}>
+      {/* Amazon Button oben rechts */}
+      <div style={{
+        display: "flex",
+        justifyContent: "flex-end",
+        padding: "10px 20px"
+      }}>
         <a 
           href="https://www.amazon.de/?tag=whitelabelche-21"
           target="_blank"
@@ -135,20 +146,31 @@ export default function Home() {
 
       {/* Header */}
       <div style={headerStyle}>
-        <h1 style={{ fontSize: "34px", fontWeight: "bold" }}>White Label Checker</h1>
+        <h1 style={{ fontSize: "34px", fontWeight: "bold" }}>
+          White Label Checker
+        </h1>
 
         <p style={{ maxWidth: "700px", margin: "10px auto", opacity: 0.95 }}>
-          Viele Produkte auf Amazon stammen aus derselben Fabrik in China – und werden nur mit einem Fantasienamen versehen.
+          Viele Produkte auf Amazon stammen aus derselben Fabrik in China – und
+          werden nur mit einem Fantasienamen versehen.
           Unsere Suche hilft dir, solche Produkte zu erkennen.
         </p>
 
-        {/* Search Bar */}
-        <form onSubmit={handleSearch} style={formStyle}>
+        {/* Suchfeld */}
+        <form 
+          onSubmit={handleSearch} 
+          style={{
+            display: "flex",
+            gap: "10px",
+            justifyContent: "center",
+            marginTop: "25px"
+          }}
+        >
           <input 
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Amazon Produkt suchen..."
-            style={{ 
+            style={{
               padding: "12px",
               fontSize: "16px",
               width: "60%",
@@ -175,7 +197,7 @@ export default function Home() {
       </div>
 
       {/* Filter */}
-      <div style={{ textAlign: "center", marginBottom: "20px" }}>
+      <div style={{ textAlign: "center", marginBottom: "20px", color: textColor }}>
         <label style={{ display: "inline-flex", gap: "8px", alignItems: "center" }}>
           <input 
             type="checkbox" 
@@ -185,7 +207,6 @@ export default function Home() {
           White-Label-Produkte ausblenden
         </label>
 
-        {/* Info Icon */}
         <span 
           style={infoIcon}
           onClick={() => setShowInfo(!showInfo)}
@@ -194,12 +215,13 @@ export default function Home() {
         </span>
       </div>
 
-      {/* Info Box */}
+      {/* Info-Popup */}
       {showInfo && (
         <div style={infoPopup}>
           <strong>Was ist ein White-Label-Produkt?</strong>
           <br /><br />
-          Ein White-Label-Produkt wird von einer Fabrik hergestellt und von vielen Händlern unter verschiedenen Markennamen verkauft.
+          Ein White-Label-Produkt wird von einer Fabrik hergestellt und von
+          vielen Händlern unter verschiedenen Fantasienamen verkauft.
           <br /><br />
           <button 
             onClick={() => setShowInfo(false)}
@@ -219,8 +241,8 @@ export default function Home() {
         </div>
       )}
 
-      {/* Results */}
-      {loading && <p style={{ textAlign: "center" }}>Suche läuft...</p>}
+      {/* Ergebnisse */}
+      {loading && <p style={{ textAlign: "center", color: textColor }}>Suche läuft...</p>}
 
       <div style={cardGrid}>
         {products
@@ -232,7 +254,6 @@ export default function Home() {
               onMouseEnter={e => Object.assign(e.currentTarget.style, cardHover)}
               onMouseLeave={e => Object.assign(e.currentTarget.style, cardStyle)}
             >
-              {/* WL Badge */}
               {isWhiteLabel(p.brand) && (
                 <div style={wlBadge}>WL</div>
               )}
@@ -243,7 +264,7 @@ export default function Home() {
                 style={{ width: "100%", borderRadius: "10px" }}
               />
 
-              <h3 style={{ marginTop: "10px", fontSize: "18px" }}>{p.title}</h3>
+              <h3 style={{ marginTop: "10px" }}>{p.title}</h3>
               <p style={{ opacity: 0.7 }}>{p.brand}</p>
 
               <p style={{ fontSize: "20px", fontWeight: "bold" }}>{p.price} €</p>
