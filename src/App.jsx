@@ -15,31 +15,61 @@ export default function App() {
   }
 
   async function handleSearch(e) {
-    if (e) e.preventDefault(); // verhindert Form-Reload
+    if (e) e.preventDefault();
     setLoading(true);
     const results = await searchAmazonMock(query);
     setProducts(results);
     setLoading(false);
   }
 
-  const pageStyle = {
-    fontFamily: "Arial, sans-serif",
-    padding: "20px",
-    maxWidth: "900px",
-    margin: "auto"
+  const headerStyle = {
+    background: "linear-gradient(135deg, #0070f3, #3291ff)",
+    padding: "40px 20px",
+    color: "white",
+    textAlign: "center",
+    borderRadius: "0 0 20px 20px",
+    marginBottom: "25px"
   };
 
-  const searchArea = {
+  const headerTitle = {
+    fontSize: "32px",
+    fontWeight: "bold",
+    margin: "0"
+  };
+
+  const headerSubtitle = {
+    fontSize: "18px",
+    marginTop: "10px",
+    opacity: 0.9
+  };
+
+  const topBar = {
+    display: "flex",
+    justifyContent: "flex-end",
+    marginBottom: "10px"
+  };
+
+  const amazonButton = {
+    padding: "10px 16px",
+    background: "white",
+    color: "#0070f3",
+    fontWeight: "bold",
+    borderRadius: "8px",
+    cursor: "pointer",
+    border: "none"
+  };
+
+  const formStyle = {
     display: "flex",
     gap: "10px",
-    marginBottom: "15px"
+    justifyContent: "center",
+    marginTop: "25px"
   };
 
   const cardGrid = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
     gap: "20px",
-    marginTop: "20px"
   };
 
   const cardStyle = {
@@ -52,68 +82,104 @@ export default function App() {
   };
 
   return (
-    <div style={pageStyle}>
-      <h1 style={{ textAlign: "center" }}>White Label Checker MVP</h1>
+    <div>
 
-      {/* FORM ELEMENT → ENTER FUNKTIONIERT AUTOMATISCH */}
-      <form onSubmit={handleSearch} style={searchArea}>
-        <input 
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          placeholder="Amazon Produkt suchen..."
-          style={{ flex: 1, padding: "10px", fontSize: "16px" }}
-        />
-
-        <button 
-          type="submit"
-          style={{
-            padding: "10px 20px",
-            fontSize: "16px",
-            cursor: "pointer",
-            background: "#0070f3",
-            color: "white",
-            border: "none",
-            borderRadius: "6px"
-          }}
+      {/* AMAZON BUTTON OBEN RECHTS */}
+      <div style={topBar}>
+        <a 
+          href="https://www.amazon.de/?tag=whitelabelche-21"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Suchen
-        </button>
-      </form>
-
-      <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        <input 
-          type="checkbox" 
-          checked={hideWL} 
-          onChange={() => setHideWL(!hideWL)} 
-        />
-        White-Label-Produkte ausblenden
-      </label>
-
-      {loading && <p>Suche läuft...</p>}
-
-      <div style={cardGrid}>
-        {products
-          .filter(p => !hideWL || !isWhiteLabel(p.brand))
-          .map((p, i) => (
-            <div key={i} style={cardStyle}>
-              <img 
-                src={p.image} 
-                alt={p.title} 
-                style={{ width: "100%", borderRadius: "8px" }}
-              />
-              <h3>{p.title}</h3>
-              <p><strong>{p.brand}</strong></p>
-
-              {isWhiteLabel(p.brand) && (
-                <p style={{ color: "red", fontWeight: "bold" }}>
-                  (White-Label erkannt)
-                </p>
-              )}
-
-              <p>Preis: {p.price} €</p>
-            </div>
-        ))}
+          <button style={amazonButton}>Amazon öffnen</button>
+        </a>
       </div>
+
+      {/* HEADER-BEREICH */}
+      <div style={headerStyle}>
+        <h1 style={headerTitle}>White Label Checker</h1>
+        <p style={headerSubtitle}>
+          Finde echte Marken – vermeide White-Label-Produkte.
+        </p>
+
+        {/* SUCHFELD */}
+        <form onSubmit={handleSearch} style={formStyle}>
+          <input 
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Amazon Produkt suchen..."
+            style={{ 
+              padding: "12px",
+              fontSize: "16px",
+              width: "60%",
+              borderRadius: "8px",
+              border: "none"
+            }}
+          />
+
+          <button 
+            type="submit"
+            style={{
+              padding: "12px 20px",
+              fontSize: "16px",
+              cursor: "pointer",
+              background: "white",
+              color: "#0070f3",
+              border: "none",
+              borderRadius: "8px",
+              fontWeight: "bold"
+            }}
+          >
+            Suchen
+          </button>
+        </form>
+      </div>
+
+      {/* WHITE-LABEL FILTER */}
+      <div style={{ textAlign: "center", marginBottom: "15px" }}>
+        <label style={{ display: "inline-flex", gap: "8px", alignItems: "center" }}>
+          <input 
+            type="checkbox" 
+            checked={hideWL} 
+            onChange={() => setHideWL(!hideWL)} 
+          />
+          White-Label-Produkte ausblenden
+        </label>
+      </div>
+
+      {/* SUCHE LÄUFT */}
+      {loading && <p style={{ textAlign: "center" }}>Suche läuft...</p>}
+
+      {/* PRODUKTGRID */}
+      <div style={{ padding: "20px" }}>
+        <div style={cardGrid}>
+          {products
+            .filter(p => !hideWL || !isWhiteLabel(p.brand))
+            .map((p, i) => (
+              <div key={i} style={cardStyle}>
+                <img 
+                  src={p.image} 
+                  alt={p.title} 
+                  style={{ width: "100%", borderRadius: "8px" }}
+                />
+
+                <h3>{p.title}</h3>
+
+                <p><strong>{p.brand}</strong></p>
+
+                {isWhiteLabel(p.brand) && (
+                  <p style={{ color: "red", fontWeight: "bold" }}>
+                    (White-Label erkannt)
+                  </p>
+                )}
+
+                <p>Preis: {p.price} €</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
     </div>
   );
 }
