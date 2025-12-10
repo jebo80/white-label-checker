@@ -33,27 +33,17 @@ export default function Home() {
   const pageBg = dark ? "#1a1a1a" : "#f5f5f5";
   const textColor = dark ? "#eaeaea" : "#222";
 
+  // ⭐ HIER: schöner, moderner Header mit zwei Farbvarianten
   const headerStyle = {
     background: dark
-      ? "linear-gradient(135deg, #0d47a1, #1565c0)"
-      : "linear-gradient(135deg, #0070f3, #3291ff)",
+      ? "linear-gradient(135deg, #0e1b33, #1b2f55)"   // Darkmode: edles Navy-Tech
+      : "linear-gradient(135deg, #0070f3, #1a75ff)",   // Hellmodus: modernes Blau
     padding: "40px 20px 60px 20px",
     color: "white",
     textAlign: "center",
     borderRadius: "0 0 25px 25px",
     marginBottom: "25px",
     transition: "0.3s"
-  };
-
-  const amazonButton = {
-    padding: "10px 16px",
-    background: "#ff9900",
-    color: "black",
-    fontWeight: "bold",
-    borderRadius: "8px",
-    cursor: "pointer",
-    border: "none",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.15)"
   };
 
   const cardGrid = {
@@ -127,24 +117,9 @@ export default function Home() {
   };
 
   return (
-    <div style={{ background: pageBg, minHeight: "100%", paddingBottom: "30px", transition: "0.3s" }}>
+    <div style={{ background: pageBg, minHeight: "100%", paddingBottom: "30px" }}>
 
-      {/* Amazon Button oben rechts */}
-      <div style={{
-        display: "flex",
-        justifyContent: "flex-end",
-        padding: "10px 20px"
-      }}>
-        <a 
-          href="https://www.amazon.de/?tag=whitelabelche-21"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <button style={amazonButton}>Amazon öffnen</button>
-        </a>
-      </div>
-
-      {/* Header */}
+      {/* HEADER */}
       <div style={headerStyle}>
         <h1 style={{ fontSize: "34px", fontWeight: "bold" }}>
           White Label Checker
@@ -215,7 +190,7 @@ export default function Home() {
         </span>
       </div>
 
-      {/* Info-Popup */}
+      {/* Info Popup */}
       {showInfo && (
         <div style={infoPopup}>
           <strong>Was ist ein White-Label-Produkt?</strong>
@@ -290,7 +265,6 @@ export default function Home() {
           ))
         }
       </div>
-
     </div>
   );
 }
