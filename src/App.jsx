@@ -58,9 +58,15 @@ export default function App() {
         <input 
           value={query}
           onChange={e => setQuery(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
           placeholder="Amazon Produkt suchen..."
           style={{ flex: 1, padding: "10px", fontSize: "16px" }}
         />
+
         <button 
           onClick={handleSearch}
           style={{
