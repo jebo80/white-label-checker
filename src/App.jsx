@@ -22,31 +22,10 @@ export default function App() {
     setLoading(false);
   }
 
-  const headerStyle = {
-    background: "linear-gradient(135deg, #0070f3, #3291ff)",
-    padding: "40px 20px",
-    color: "white",
-    textAlign: "center",
-    borderRadius: "0 0 20px 20px",
-    marginBottom: "25px"
-  };
-
-  const headerTitle = {
-    fontSize: "32px",
-    fontWeight: "bold",
-    margin: "0"
-  };
-
-  const headerSubtitle = {
-    fontSize: "18px",
-    marginTop: "10px",
-    opacity: 0.9
-  };
-
   const topBar = {
     display: "flex",
     justifyContent: "flex-end",
-    marginBottom: "10px"
+    padding: "10px 20px"
   };
 
   const amazonButton = {
@@ -59,6 +38,31 @@ export default function App() {
     border: "none"
   };
 
+  const headerStyle = {
+    background: "linear-gradient(135deg, #0070f3, #3291ff)",
+    padding: "45px 20px 55px 20px",
+    color: "white",
+    textAlign: "center",
+    borderRadius: "0 0 25px 25px",
+    marginBottom: "25px"
+  };
+
+  const headerTitle = {
+    fontSize: "34px",
+    fontWeight: "bold",
+    margin: "0"
+  };
+
+  const headerSubtitle = {
+    fontSize: "18px",
+    opacity: 0.95,
+    marginTop: "12px",
+    maxWidth: "700px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    lineHeight: "1.4"
+  };
+
   const formStyle = {
     display: "flex",
     gap: "10px",
@@ -69,7 +73,7 @@ export default function App() {
   const cardGrid = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-    gap: "20px",
+    gap: "20px"
   };
 
   const cardStyle = {
@@ -95,11 +99,16 @@ export default function App() {
         </a>
       </div>
 
-      {/* HEADER-BEREICH */}
+      {/* HEADER */}
       <div style={headerStyle}>
         <h1 style={headerTitle}>White Label Checker</h1>
+
         <p style={headerSubtitle}>
-          Finde echte Marken – vermeide White-Label-Produkte.
+          Viele Produkte auf Amazon stammen aus derselben Fabrik in China – und 
+          werden nur mit einem Fantasienamen versehen. Diese White-Label-Produkte 
+          wirken wie Marken, sind aber oft minderwertig. 
+          <br />
+          <strong>Unsere Suche hilft dir, solche Produkte zu erkennen.</strong>
         </p>
 
         {/* SUCHFELD */}
@@ -135,8 +144,8 @@ export default function App() {
         </form>
       </div>
 
-      {/* WHITE-LABEL FILTER */}
-      <div style={{ textAlign: "center", marginBottom: "15px" }}>
+      {/* FILTER */}
+      <div style={{ textAlign: "center", marginBottom: "20px" }}>
         <label style={{ display: "inline-flex", gap: "8px", alignItems: "center" }}>
           <input 
             type="checkbox" 
@@ -147,7 +156,6 @@ export default function App() {
         </label>
       </div>
 
-      {/* SUCHE LÄUFT */}
       {loading && <p style={{ textAlign: "center" }}>Suche läuft...</p>}
 
       {/* PRODUKTGRID */}
@@ -164,7 +172,6 @@ export default function App() {
                 />
 
                 <h3>{p.title}</h3>
-
                 <p><strong>{p.brand}</strong></p>
 
                 {isWhiteLabel(p.brand) && (
