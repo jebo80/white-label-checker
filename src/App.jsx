@@ -16,10 +16,9 @@ export default function App() {
   );
 }
 
-// --------------------
+// ----------------------------------------------------
 // Navigation
-// --------------------
-
+// ----------------------------------------------------
 function Navigation() {
   const { dark, setDark } = useContext(ThemeContext);
 
@@ -29,7 +28,7 @@ function Navigation() {
     padding: "12px 0",
     position: "sticky",
     top: 0,
-    zIndex: 50,
+    zIndex: 200,
     transition: "0.3s"
   };
 
@@ -65,28 +64,52 @@ function Navigation() {
     color: dark ? "white" : "black"
   };
 
+  const amazonBtn = {
+    padding: "8px 14px",
+    background: "#ff9900",
+    borderRadius: "6px",
+    color: "black",
+    fontWeight: "bold",
+    border: "none",
+    cursor: "pointer"
+  };
+
   return (
     <header style={headerBar}>
       <div style={navContainer}>
+
+        {/* Logo */}
         <Link to="/" style={logoLink}>White Label Checker</Link>
 
-        <nav style={{ display: "flex", gap: "25px", alignItems: "center" }}>
+        {/* Navigation rechts */}
+        <nav style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+
           <Link to="/" style={navItem}>Startseite</Link>
           <Link to="/info" style={navItem}>Info</Link>
 
+          {/* Amazon Button */}
+          <a
+            href="https://www.amazon.de/?tag=whitelabelche-21"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button style={amazonBtn}>Amazon</button>
+          </a>
+
+          {/* Darkmode Switch */}
           <button onClick={() => setDark(!dark)} style={toggleBtn}>
             {dark ? "☀️ Hell" : "🌙 Dunkel"}
           </button>
+
         </nav>
       </div>
     </header>
   );
 }
 
-// --------------------
-// Inhalt
-// --------------------
-
+// ----------------------------------------------------
+// Main content
+// ----------------------------------------------------
 function MainContent() {
   return (
     <div style={{ minHeight: "70vh" }}>
@@ -98,10 +121,9 @@ function MainContent() {
   );
 }
 
-// --------------------
+// ----------------------------------------------------
 // Footer
-// --------------------
-
+// ----------------------------------------------------
 function Footer() {
   const { dark } = useContext(ThemeContext);
 
