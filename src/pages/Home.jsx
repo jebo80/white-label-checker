@@ -6,7 +6,6 @@ import "./Home.css";
 function Home() {
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState([]);
-  const { theme } = useTheme();
 
   const handleSearch = async () => {
     const results = await searchAmazonMock(query);
@@ -18,13 +17,13 @@ function Home() {
   };
 
   return (
-    <div className="home-container">
+    <div className="home-wrapper">
 
-      {/* HERO */}
+      {/* HERO-BEREICH */}
       <section className="hero">
-        <h1 className="hero-title">Finde echte Marken.</h1>
+        <h1 className="hero-title">Finde echte Markenprodukte.</h1>
         <p className="hero-subtitle">
-          SiebMalDurch hilft dir, Produkte schnell und klar zu bewerten.
+          SiebMalDurch zeigt dir, was seriös wirkt – und was White-Label sein könnte.
         </p>
 
         <div className="hero-search">
@@ -40,29 +39,32 @@ function Home() {
       </section>
 
       {/* PRODUKTE */}
-      <div className="product-grid">
-        {products.map((p, index) => (
-          <div key={index} className="product-card">
-            <img src={p.image} alt={p.title} />
-            <h3>{p.title}</h3>
-            <p className="brand">{p.brand}</p>
+      <div className="results-section">
+        <div className="product-grid">
+          {products.map((p, index) => (
+            <div key={index} className="product-card">
+              <img src={p.image} alt={p.title} />
 
-            {p.isWhiteLabel && (
-              <p className="whitelabel-warning">⚠️ Verdächtig</p>
-            )}
+              <h3>{p.title}</h3>
+              <p className="brand">{p.brand}</p>
 
-            <p className="price">{p.price}</p>
+              {p.isWhiteLabel && (
+                <p className="whitelabel-warning">⚠ Verdacht auf White-Label</p>
+              )}
 
-            <a
-              href={p.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="amazon-link"
-            >
-              Auf Amazon ansehen
-            </a>
-          </div>
-        ))}
+              <p className="price">{p.price}</p>
+
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="amazon-link"
+              >
+                Auf Amazon ansehen →
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
 
     </div>
