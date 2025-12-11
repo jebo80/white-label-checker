@@ -177,10 +177,8 @@
   box-shadow: var(--shadow);
   overflow: hidden;
   position: relative;
-
   display: flex;
   flex-direction: column;
-
   transition: 0.25s ease;
 }
 
@@ -203,19 +201,17 @@
 
 
 /* ============================
-   IMAGE BLOCK (Bild + Hinweis)
+   IMAGE WITH HOVER OVERLAY
 ============================ */
 .card-image-wrapper {
   width: 100%;
   height: 210px;
   background: var(--bg-alt);
+  position: relative;
+
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  padding-top: 10px;
-  border-bottom: 1px solid var(--border);
   cursor: pointer;
 }
 
@@ -225,9 +221,30 @@
   object-fit: contain;
 }
 
-.image-hint {
-  font-size: 0.8rem;
-  color: var(--text-muted);
+/* Overlay */
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 8px 0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.card-image-wrapper:hover .card-overlay {
+  opacity: 1;
+}
+
+/* Mobile tap behavior */
+@media (hover: none) {
+  .card-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.35);
+  }
 }
 
 
@@ -244,10 +261,8 @@
   font-weight: 600;
   color: var(--text);
   line-height: 1.35;
-
   height: 2.7rem;
   overflow: hidden;
-
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -272,28 +287,5 @@
 
 
 /* ============================
-   UNTERER BEREICH
-============================ */
-.card-lower {
-  background: var(--bg-alt);
-  padding: 16px;
-  display: flex;
-  justify-content: center;
-}
-
-.amazon-btn-small {
-  width: 75%;
-  padding: 12px 0;
-  border-radius: var(--radius);
-  background: #f7a600;
-  border: 1px solid #d68a00;
-  color: #111;
-  text-align: center;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.amazon-btn-small:hover {
-  background: #ffb72b;
-}
+   LOWER SECTION
+===============
