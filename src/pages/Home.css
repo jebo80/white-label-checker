@@ -159,16 +159,19 @@
   text-align: center;
 }
 
+/* FIX: Titel immer exakt 2 Zeilen hoch */
 .card-title {
   font-size: 1rem;
   font-weight: 600;
   color: var(--text);
+  line-height: 1.35;
 
-  /* Max 2 Zeilen */
+  height: 2.7rem;         /* genau 2 Zeilen */
+  overflow: hidden;
+
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .card-brand {
@@ -177,7 +180,7 @@
   margin-top: 6px;
 }
 
-/* NEUE POSITION: Preis über Buttons */
+/* Preis */
 .card-price {
   font-size: 1.3rem;
   font-weight: 700;
