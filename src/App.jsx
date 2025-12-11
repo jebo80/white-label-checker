@@ -50,9 +50,8 @@ function Navigation() {
           <Link to="/info">Info</Link>
         </nav>
 
-        {/* Right side controls */}
+        {/* Right side (Amazon stays here) */}
         <div className="header-actions">
-
           <a
             href="https://www.amazon.de/?tag=siebmaldurch-21"
             target="_blank"
@@ -60,20 +59,21 @@ function Navigation() {
           >
             <button className="amazon-btn">Amazon</button>
           </a>
-
-          <button
-  onClick={() => setDark(!dark)}
-  className="mode-toggle"
->
-  {dark ? "☀️ Hellmodus" : "🌙 Dunkelmodus"}
-</button>
-
-
         </div>
+
+        {/* Mode toggle (separat rechts fixiert) */}
+        <button
+          onClick={() => setDark(!dark)}
+          className="mode-toggle-fixed"
+        >
+          {dark ? "☀️ Hell" : "🌙 Dunkel"}
+        </button>
+
       </div>
     </header>
   );
 }
+
 
 /* ======================================================
    Footer
