@@ -5,17 +5,19 @@ import "./Home.css";
 function Home() {
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleSearch = async () => {
     const results = await searchAmazonMock(query);
     setProducts(results);
+    setSelectedProduct(null);
   };
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") handleSearch();
   };
 
-  const showWelcome = products.length === 0;
+  const showWelcome = products.length === 0 && !selectedProduct;
 
   return (
     <div className="home-wrapper">
@@ -56,47 +58,88 @@ function Home() {
         </section>
       )}
 
-      {/* PRODUKTKACHELN */}
-      <div className="results-section">
-        <div className="product-grid">
-          {products.map((p, index) => (
-            <div key={index} className="product-card">
+      {/* ===============================
+          DETAIL ANSICHT
+      ================================ */}
+      {selectedProduct && (
+        <div className="detail-view">
 
-              {p.isWhiteLabel && <div className="wl-badge">Verdacht</div>}
+          <button className="back-button" onClick={() => setSelectedProduct(null)}>
+            ← Zurück zu den Ergebnissen
+          </button>
 
-              <div className="card-image-wrapper">
-                <img src={p.image} alt={p.title} />
-              </div>
+          <div className="detail-content">
 
-              {/* Content */}
-              <div className="card-content">
-                <h3 className="card-title">{p.title}</h3>
-                <p className="card-brand">{p.brand}</p>
-              </div>
-
-              {/* Preis jetzt direkt über den Buttons */}
-              <div className="card-price">
-                {p.price} €
-              </div>
-
-              {/* BUTTONs */}
-              <div className="card-buttons">
-                <button className="details-btn">Details</button>
-
-                <a
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="amazon-btn-small"
-                >
-                  Auf Amazon ansehen →
-                </a>
-              </div>
-
+            <div className="detail-image">
+              <img src={selectedProduct.image} alt={selectedProduct.title} />
             </div>
-          ))}
+
+            <div className="detail-info">
+              <h2>{selectedProduct.title}</h2>
+              <p className="detail-brand">{selectedProduct.brand}</p>
+              <p className="detail-price">{selectedProduct.price} €</p>
+
+              <a
+                href={selectedProduct.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="detail-amazon-btn"
+              >
+                Auf Amazon ansehen →
+              </a>
+            </div>
+
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* ===============================
+          PRODUKT GRID
+      ================================ */}
+      {!selectedProduct && (
+        <div className="results-section">
+          <div className="product-grid">
+            {products.map((p, index) => (
+              <div key={index} className="product-card">
+
+                {p.isWhiteLabel && <div className="wl-badge">Verdacht</div>}
+
+                <div className="card-image-wrapper">
+                  <img src={p.image} alt={p.title} />
+                </div>
+
+                <div className="card-content">
+                  <h3 className="card-title">{p.title}</h3>
+                  <p className="card-brand">{p.brand}</p>
+                </div>
+
+                {/* Preis */}
+                <div className="card-price">{p.price} €</div>
+
+                {/* Unterer Block (grau) */}
+                <div className="card-lower">
+                  <button
+                    className="details-btn"
+                    onClick={() => setSelectedProduct(p)}
+                  >
+                    Details
+                  </button>
+
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="amazon-btn-small"
+                  >
+                    Auf Amazon ansehen →
+                  </a>
+                </div>
+
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
     </div>
   );
