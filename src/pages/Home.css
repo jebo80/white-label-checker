@@ -87,7 +87,7 @@
 
 
 /* ============================
-   DETAIL VIEW
+   DETAILVIEW
 ============================ */
 .detail-view {
   max-width: 900px;
@@ -210,6 +210,7 @@
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid var(--border);
+  cursor: pointer;
 }
 
 .card-image-wrapper img {
@@ -218,20 +219,28 @@
   object-fit: contain;
 }
 
+/* Hinweis unter Bild */
+.image-hint {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 6px 0;
+}
+
+
 /* CONTENT */
 .card-content {
   padding: 18px;
   text-align: center;
 }
 
-/* Titel immer fix 2 Zeilen */
 .card-title {
   font-size: 1rem;
   font-weight: 600;
   color: var(--text);
   line-height: 1.35;
 
-  height: 2.7rem; /* exakt 2 Zeilen */
+  height: 2.7rem;
   overflow: hidden;
 
   display: -webkit-box;
@@ -245,6 +254,7 @@
   margin-top: 6px;
 }
 
+
 /* Preis */
 .card-price {
   font-size: 1.3rem;
@@ -257,46 +267,26 @@
 
 
 /* ============================
-   UNTERER BLOCK — NEU (grau)
+   UNTERER BLOCK — angepasst
 ============================ */
 .card-lower {
   background: var(--bg-alt);
-  padding: 18px;
+  padding: 16px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  justify-content: center;
 }
 
-/* Buttons */
-.details-btn,
 .amazon-btn-small {
   width: 75%;
   padding: 12px 0;
   border-radius: var(--radius);
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-
-/* DETAILS – Blau */
-.details-btn {
-  background: var(--primary);
-  color: #fff;
-  border: none;
-}
-
-.details-btn:hover {
-  background: var(--primary-dark);
-}
-
-/* AMAZON – Orange */
-.amazon-btn-small {
   background: #f7a600;
   border: 1px solid #d68a00;
   color: #111;
   text-align: center;
   text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .amazon-btn-small:hover {
