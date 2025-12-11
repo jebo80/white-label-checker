@@ -13,9 +13,12 @@ import "./App.css";
 export default function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <Navigation />
-        <main className="main-wrapper">
+  <div className="app-container">
+    <Router>
+      <Navigation />
+
+      <main className="main-wrapper">
+
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/info" element={<Info />} />
