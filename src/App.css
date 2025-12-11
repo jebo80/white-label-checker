@@ -1,36 +1,29 @@
-/* ============================================
-   Farbvariablen — Light Mode
-   ============================================ */
+/* ===== Farben ===== */
 :root {
-  --accent: #3B82F6;
+  --accent: #3b82f6;
 
   --bg: #ffffff;
-  --bg-alt: #f5f5f5;
+  --bg-alt: #f3f4f6;
   --text: #111111;
-  --text-muted: #666666;
+  --text-muted: #6b7280;
 
   --card-bg: #ffffff;
-  --border: #d6d6d6;
+  --border: #d1d5db;
 
   --header-height: 70px;
 }
 
-/* ============================================
-   Dark Mode
-   ============================================ */
 body.dark {
-  --bg: #0f0f0f;
+  --bg: #111111;
   --bg-alt: #1a1a1a;
-  --text: #eeeeee;
-  --text-muted: #aaaaaa;
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
 
-  --card-bg: #1a1a1a;
-  --border: #333333;
+  --card-bg: #1f1f1f;
+  --border: #2f2f2f;
 }
 
-/* ============================================
-   Global Layout
-   ============================================ */
+/* ===== Global ===== */
 body {
   margin: 0;
   background: var(--bg);
@@ -49,9 +42,7 @@ body {
   padding: 20px;
 }
 
-/* ============================================
-   Header
-   ============================================ */
+/* ===== Header ===== */
 .header {
   height: var(--header-height);
   background: var(--bg-alt);
@@ -72,15 +63,13 @@ body {
 }
 
 .brand {
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 700;
   text-decoration: none;
   color: var(--text);
-  letter-spacing: 0.5px;
 }
 
-/* SiebMalDurch farbig: S M D */
-.smd {
+.brand-accent {
   color: var(--accent);
 }
 
@@ -90,8 +79,8 @@ body {
 }
 
 .nav a {
-  color: var(--text);
   text-decoration: none;
+  color: var(--text);
   font-weight: 500;
 }
 
@@ -99,30 +88,25 @@ body {
   color: var(--accent);
 }
 
+/* ===== Header Right ===== */
 .header-right {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-/* Amazon Button */
 .amazon-btn {
   padding: 8px 16px;
   background: #ff9900;
   color: #111;
-  border-radius: 6px;
-  text-decoration: none;
   font-weight: 600;
-  border: 1px solid #e48e00;
+  border-radius: 6px;
+  border: 1px solid #d67f00;
+  text-decoration: none;
 }
 
-.amazon-btn:hover {
-  opacity: 0.9;
-}
-
-/* Darkmode Button */
 .theme-btn {
-  width: 70px; /* FIXED WIDTH so nothing moves */
+  width: 70px;
   padding: 8px 0;
   border-radius: 6px;
   border: 1px solid var(--border);
@@ -131,14 +115,12 @@ body {
   cursor: pointer;
 }
 
-/* ============================================
-   Footer
-   ============================================ */
+/* ===== Footer ===== */
 .footer {
   padding: 20px;
+  text-align: center;
   background: var(--bg-alt);
   border-top: 1px solid var(--border);
-  text-align: center;
 }
 
 .footer-links {
@@ -149,8 +131,8 @@ body {
 }
 
 .footer-links a {
-  color: var(--text);
   text-decoration: none;
+  color: var(--text);
 }
 
 .footer-links a:hover {
@@ -158,6 +140,6 @@ body {
 }
 
 .footer-copy {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
 }
