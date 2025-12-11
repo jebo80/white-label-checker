@@ -9,14 +9,18 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const saved = localStorage.getItem("darkmode");
-    setDark(saved === "true" || (saved === null && systemPrefersDark));
+
+    const isDark = saved === "true" || (saved === null && systemPrefersDark);
+    setDark(isDark);
+
+    // Globale Klasse am <html>-Tag
+    document.documentElement.classList.toggle("dark", isDark);
   }, []);
 
-  // Änderung speichern
+  // Änderung speichern + Klasse aktualisieren
   useEffect(() => {
     localStorage.setItem("darkmode", dark);
-    document.body.style.background = dark ? "#1a1a1a" : "#f5f5f5";
-    document.body.style.color = dark ? "#e6e6e6" : "#222";
+    document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
 
   return (
