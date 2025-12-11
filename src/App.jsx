@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./ThemeContext";
 
@@ -7,52 +7,67 @@ import Info from "./pages/Info";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 
-import { Analytics } from "@vercel/analytics/react";
-
 import "./App.css";
 
 function Header() {
   const { theme, toggleTheme } = useTheme();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
     <header className="header">
-      <div className="header-left">
 
-        {/* Logo + Brand */}
-        <div className="brand-block">
+      {/* HEADER TOP ROW */}
+      <div className="header-top">
+
+        {/* LEFT: LOGO + BRAND */}
+        <div className="header-left">
           <div className="brand-logo"></div>
 
           <div className="brand-text">
             <Link to="/" className="brand">
-              <span className="brand-accent">S</span>ieb
-              <span className="brand-accent">M</span>al
-              <span className="brand-accent">D</span>urch
+              Sieb<span className="brand-accent">Mal</span>Durch
             </Link>
-            <div className="brand-sub">Analyse-Tool für Markenprodukte</div>
+            <span className="brand-sub">Finde echte Markenprodukte</span>
           </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="nav">
-          <Link to="/">Startseite</Link>
-          <Link to="/info">Info</Link>
-        </nav>
+        {/* RIGHT: THEME + BURGER */}
+        <div className="header-controls">
+          <button className="theme-btn" onClick={toggleTheme}>
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
+
+          <button className="burger-btn" onClick={toggleMenu}>
+            ☰
+          </button>
+        </div>
+
       </div>
 
-      <div className="header-right">
+      {/* AMAZON BUTTON ALWAYS VISIBLE */}
+      <div className="header-amazon-row">
         <a
-          href="https://www.amazon.de/?tag=whitelabelche-21"
+          href="https://www.amazon.de"
           target="_blank"
           rel="noopener noreferrer"
           className="amazon-btn"
         >
           Amazon
         </a>
-
-        <button className="theme-btn" onClick={toggleTheme}>
-          {theme === "dark" ? "☀️" : "🌙"}
-        </button>
       </div>
+
+      {/* SLIDE-DOWN MENU */}
+      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        <nav className="mobile-nav">
+          <Link to="/" onClick={() => setMenuOpen(false)}>Startseite</Link>
+          <Link to="/info" onClick={() => setMenuOpen(false)}>Info</Link>
+          <Link to="/impressum" onClick={() => setMenuOpen(false)}>Impressum</Link>
+          <Link to="/datenschutz" onClick={() => setMenuOpen(false)}>Datenschutz</Link>
+        </nav>
+      </div>
+
     </header>
   );
 }
@@ -60,13 +75,13 @@ function Header() {
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-links">
+      <nav className="footer-nav">
         <Link to="/">Startseite</Link>
         <Link to="/info">Info</Link>
         <Link to="/impressum">Impressum</Link>
         <Link to="/datenschutz">Datenschutz</Link>
-      </div>
-      <p className="footer-copy">© {new Date().getFullYear()} SiebMalDurch.de</p>
+      </nav>
+      <p className="footer-copy">© 2025 SiebMalDurch</p>
     </footer>
   );
 }
@@ -76,9 +91,10 @@ function App() {
     <ThemeProvider>
       <Router>
         <div className="app-container">
+
           <Header />
 
-          <main className="main">
+          <main>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/info" element={<Info />} />
@@ -89,8 +105,6 @@ function App() {
 
           <Footer />
 
-          {/* Vercel Analytics */}
-          <Analytics />
         </div>
       </Router>
     </ThemeProvider>
