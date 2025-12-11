@@ -1,6 +1,6 @@
-/* ================================
+/* =======================================
    GLOBAL VARIABLES
-================================ */
+======================================= */
 :root {
   --primary: #4aa8ff;
   --primary-dark: #1f7ed6;
@@ -32,9 +32,14 @@ body.dark {
   --shadow: 0 4px 18px rgba(0,0,0,0.4);
 }
 
-/* ================================
+/* Prevent ALL horizontal scroll */
+html, body {
+  overflow-x: hidden;
+}
+
+/* =======================================
    BASE STYLES
-================================ */
+======================================= */
 body {
   margin: 0;
   background: var(--bg);
@@ -52,9 +57,9 @@ main {
   flex: 1;
 }
 
-/* ================================
+/* =======================================
    HEADER
-================================ */
+======================================= */
 .header {
   width: 100%;
   background: var(--bg-alt);
@@ -63,7 +68,7 @@ main {
   padding: 12px 22px;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 200;
 }
 
 /* HEADER TOP ROW */
@@ -136,15 +141,21 @@ main {
   cursor: pointer;
 }
 
-/* AMAZON ROW ALWAYS VISIBLE */
-.header-amazon-row {
-  width: 100%;
+/* Amazon button INSIDE header-controls (Desktop) */
+.header-amazon-btn {
+  display: inline-block;
+}
+
+/* Mobile Amazon row hidden by default */
+.mobile-amazon-row {
+  display: none;
   text-align: center;
   margin-top: 10px;
 }
 
+/* Amazon button general */
 .amazon-btn {
-  padding: 10px 22px;
+  padding: 10px 20px;
   background: #f7a600;
   color: #111;
   border-radius: var(--radius);
@@ -157,21 +168,21 @@ main {
   background: #ffb72b;
 }
 
-/* ================================
+/* =======================================
    MOBILE MENU (SLIDE DOWN)
-================================ */
+======================================= */
 .mobile-menu {
   width: 100%;
-  height: 0;
+  max-height: 0;
   overflow: hidden;
   background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
-  transition: height 0.3s ease, opacity 0.3s ease;
   opacity: 0;
+  transition: max-height 0.33s ease, opacity 0.33s ease;
 }
 
 .mobile-menu.open {
-  height: 180px;
+  max-height: 240px;
   opacity: 1;
 }
 
@@ -194,9 +205,9 @@ main {
   color: var(--primary);
 }
 
-/* ================================
+/* =======================================
    FOOTER
-================================ */
+======================================= */
 .footer {
   background: var(--bg-alt);
   padding: 24px 10px;
@@ -207,6 +218,7 @@ main {
 .footer-nav {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 26px;
   margin-bottom: 10px;
 }
@@ -226,9 +238,9 @@ main {
   color: var(--text-muted);
 }
 
-/* ================================
+/* =======================================
    RESPONSIVE BREAKPOINTS
-================================ */
+======================================= */
 
 /* TABLET */
 @media (max-width: 1024px) {
@@ -237,24 +249,16 @@ main {
   }
 }
 
-/* SMARTPHONE (PRIME) */
+/* SMARTPHONE */
 @media (max-width: 768px) {
 
   .header {
-    padding: 12px 16px;
+    padding: 10px 14px; /* FIX Overflow */
   }
 
-  /* Header top row spacing */
-  .header-left {
+  /* header controls tighter */
+  .header-controls {
     gap: 12px;
-  }
-
-  .brand {
-    font-size: 1.45rem;
-  }
-
-  .brand-sub {
-    display: none;
   }
 
   .theme-btn {
@@ -266,8 +270,14 @@ main {
     font-size: 1.8rem;
   }
 
-  /* Amazon button */
-  .header-amazon-row {
+  /* Desktop Amazon hidden */
+  .header-amazon-btn {
+    display: none;
+  }
+
+  /* Mobile Amazon visible */
+  .mobile-amazon-row {
+    display: block;
     margin-top: 12px;
   }
 
@@ -276,9 +286,8 @@ main {
     font-size: 0.95rem;
   }
 
-  .footer-nav {
-    flex-wrap: wrap;
-    gap: 18px;
+  .brand-sub {
+    display: none;
   }
 }
 
@@ -298,11 +307,12 @@ main {
     font-size: 1.6rem;
   }
 
-  .amazon-btn {
-    font-size: 0.85rem;
+  /* Allow menu extra room */
+  .mobile-menu.open {
+    max-height: 260px;
   }
 
-  .mobile-menu.open {
-    height: 200px;
+  .amazon-btn {
+    font-size: 0.85rem;
   }
 }
