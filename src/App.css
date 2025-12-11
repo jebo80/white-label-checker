@@ -2,7 +2,7 @@
    GLOBAL FARBSYSTEM
 ================================ */
 :root {
-  --primary: #4aa8ff;          /* Himmelblau */
+  --primary: #4aa8ff;
   --primary-dark: #1f7ed6;
 
   --bg: #ffffff;
@@ -18,17 +18,20 @@
   --shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 
+/* ================================
+   HELLERER DARKMODE
+================================ */
 body.dark {
-  --bg: #111317;
-  --bg-alt: #181b20;
+  --bg: #1a1c22;
+  --bg-alt: #23262d;
 
-  --text: #e5e7eb;
-  --text-muted: #9ca3af;
+  --text: #e9e9eb;
+  --text-muted: #b3b3b7;
 
-  --card-bg: #1c1f24;
-  --border: #2a2d33;
+  --card-bg: #262a31;
+  --border: #393d45;
 
-  --shadow: 0 4px 14px rgba(0,0,0,0.45);
+  --shadow: 0 4px 20px rgba(0,0,0,0.35);
 }
 
 /* ================================
