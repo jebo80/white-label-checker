@@ -1,29 +1,39 @@
-/* ===== Farben ===== */
+/* ================================
+   GLOBAL FARBSYSTEM
+================================ */
 :root {
-  --accent: #3b82f6;
+  --primary: #4aa8ff;          /* Himmelblau */
+  --primary-dark: #1f7ed6;
 
   --bg: #ffffff;
-  --bg-alt: #f3f4f6;
+  --bg-alt: #f5f7fa;
+
   --text: #111111;
   --text-muted: #6b7280;
 
   --card-bg: #ffffff;
-  --border: #d1d5db;
+  --border: #d6d9df;
 
-  --header-height: 70px;
+  --radius: 12px;
+  --shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 
 body.dark {
-  --bg: #111111;
-  --bg-alt: #1a1a1a;
+  --bg: #111317;
+  --bg-alt: #181b20;
+
   --text: #e5e7eb;
   --text-muted: #9ca3af;
 
-  --card-bg: #1f1f1f;
-  --border: #2f2f2f;
+  --card-bg: #1c1f24;
+  --border: #2a2d33;
+
+  --shadow: 0 4px 14px rgba(0,0,0,0.45);
 }
 
-/* ===== Global ===== */
+/* ================================
+   BASE
+================================ */
 body {
   margin: 0;
   background: var(--bg);
@@ -37,45 +47,41 @@ body {
   flex-direction: column;
 }
 
-.main {
+main {
   flex: 1;
-  padding: 20px;
 }
 
-/* ===== Header ===== */
+/* ================================
+   HEADER
+================================ */
 .header {
-  height: var(--header-height);
+  height: 76px;
   background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 22px;
+  align-items: center;
+  padding: 0 28px;
   position: sticky;
   top: 0;
   z-index: 50;
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
 .brand {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 700;
   text-decoration: none;
   color: var(--text);
 }
 
 .brand-accent {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 .nav {
   display: flex;
-  gap: 20px;
+  gap: 24px;
+  margin-left: 24px;
 }
 
 .nav a {
@@ -85,70 +91,64 @@ body {
 }
 
 .nav a:hover {
-  color: var(--accent);
+  color: var(--primary);
 }
 
-/* ===== Header Right ===== */
+/* Header Right */
 .header-right {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
 }
 
 .amazon-btn {
-  padding: 8px 16px;
-  background: #ff9900;
+  padding: 10px 18px;
+  background: #f7a600;
+  border: none;
+  border-radius: var(--radius);
   color: #111;
   font-weight: 600;
-  border-radius: 6px;
-  border: 1px solid #d67f00;
   text-decoration: none;
 }
 
 .theme-btn {
   width: 70px;
-  padding: 8px 0;
-  border-radius: 6px;
+  height: 38px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--card-bg);
   color: var(--text);
   cursor: pointer;
 }
 
-/* ===== Footer ===== */
+/* ================================
+   FOOTER
+================================ */
 .footer {
-  padding: 20px;
+  padding: 22px;
   text-align: center;
   background: var(--bg-alt);
   border-top: 1px solid var(--border);
+  margin-top: 60px;
 }
 
 .footer-links {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 24px;
   margin-bottom: 8px;
 }
 
 .footer-links a {
-  text-decoration: none;
   color: var(--text);
+  text-decoration: none;
 }
 
 .footer-links a:hover {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 .footer-copy {
   font-size: 0.85rem;
   color: var(--text-muted);
-}
-
-/* HERO Fix für Darkmode */
-body.dark .hero-title {
-  color: #e5e7eb;
-}
-
-body.dark .hero-subtitle {
-  color: #9ca3af;
 }
