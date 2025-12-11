@@ -1,153 +1,33 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "../ThemeContext";
+// src/pages/Info.jsx
+import React from "react";
 
-export default function Info() {
-  const { dark } = useContext(ThemeContext);
-
-  const pageStyle = {
-    padding: "40px 20px",
-    maxWidth: "900px",
-    margin: "auto",
-    color: dark ? "#eaeaea" : "#222"
-  };
-
-  const titleStyle = {
-    textAlign: "center",
-    fontSize: "36px",
-    marginBottom: "10px"
-  };
-
-  const subtitleStyle = {
-    textAlign: "center",
-    fontSize: "18px",
-    opacity: 0.85,
-    marginBottom: "40px"
-  };
-
-  // ⭐ Die Karten passen sich jetzt optisch dem Darkmode an
-  const cardStyle = {
-    background: dark ? "#2a2a2a" : "#ffffff",
-    padding: "25px",
-    borderRadius: "12px",
-    marginBottom: "30px",
-    boxShadow: dark
-      ? "0 4px 12px rgba(0,0,0,0.35)"
-      : "0 4px 12px rgba(0,0,0,0.1)",
-    transition: "0.3s",
-    color: dark ? "#eaeaea" : "#222"
-  };
-
-  const cardTitle = {
-    fontSize: "24px",
-    marginBottom: "15px",
-    opacity: dark ? 0.9 : 0.85
-  };
-
-  const listItem = {
-    marginBottom: "10px",
-    display: "flex",
-    alignItems: "center",
-    gap: "10px"
-  };
-
-  const iconStyle = {
-    fontSize: "20px",
-    color: dark ? "#ff6b6b" : "#d9534f"
-  };
-
-  const linkStyle = {
-    color: dark ? "#58a6ff" : "#0070f3",
-    textDecoration: "none",
-    fontWeight: "bold"
-  };
-
+function Info() {
   return (
-    <div style={pageStyle}>
-      <h1 style={titleStyle}>Was sind White-Label-Produkte?</h1>
-      <p style={subtitleStyle}>
-        Eine einfache Erklärung – damit du verstehst, warum diese Seite existiert.
+    <div style={{ maxWidth: "900px", margin: "40px auto", padding: "0 20px" }}>
+      <h1>Über SiebMalDurch</h1>
+      <p>
+        SiebMalDurch soll dir helfen, echte Markenprodukte schneller zu erkennen und verdächtige
+        White-Label-Angebote besser einschätzen zu können.
       </p>
-
-      {/* Karte 1 */}
-      <div style={cardStyle}>
-        <h2 style={cardTitle}>White-Label-Produkte kurz erklärt</h2>
-        <p>
-          Ein{" "}
-          <a href="https://de.wikipedia.org/wiki/White-Label-Produkt" style={linkStyle} target="_blank">
-            White-Label-Produkt
-          </a>{" "}
-          ist ein Artikel, der von einer Fabrik in großen Mengen produziert wird – meist in China –, 
-          und anschließend von hunderten verschiedenen Händlern auf Amazon verkauft wird.
-        </p>
-        <br />
-        <p>
-          Jeder Händler packt einfach{" "}
-          <strong>seinen eigenen Fantasie-Markennamen</strong> drauf.  
-          Das Produkt bleibt aber identisch.
-        </p>
-      </div>
-
-      {/* Karte 2 */}
-      <div style={cardStyle}>
-        <h2 style={cardTitle}>Warum sind solche Produkte problematisch?</h2>
-
-        <div style={listItem}>
-          <span style={iconStyle}>✖</span>
-          <p>
-            <strong>Markenname hat keine Bedeutung:</strong>  
-            Er ist frei erfunden.
-          </p>
-        </div>
-
-        <div style={listItem}>
-          <span style={iconStyle}>✖</span>
-          <p>
-            <strong>Geringere Qualitätskontrolle:</strong>  
-            Verschiedene Händler, gleiche Fabrik.
-          </p>
-        </div>
-
-        <div style={listItem}>
-          <span style={iconStyle}>✖</span>
-          <p>
-            <strong>Kurzlebig:</strong> Marken verschwinden oft nach wenigen Monaten.
-          </p>
-        </div>
-
-        <div style={listItem}>
-          <span style={iconStyle}>✖</span>
-          <p>
-            <strong>Gefälschte Bewertungen sind häufig:</strong> künstlich gepushte Rezensionen.
-          </p>
-        </div>
-
-        <p style={{ marginTop: "10px" }}>
-          Für Käufer wirkt es wie ein Markenprodukt – aber oft steckt nur ein{" "}
-          <a
-            href="https://de.wikipedia.org/wiki/No-Name-Produkt"
-            style={linkStyle}
-            target="_blank"
-          >
-            billiger No-Name-Artikel
-          </a>{" "}
-          dahinter.
-        </p>
-      </div>
-
-      {/* Karte 3 */}
-      <div style={cardStyle}>
-        <h2 style={cardTitle}>Wie hilft dir der White Label Checker?</h2>
-
-        <p>
-          Unsere Seite zeigt dir, ob ein Produkt wahrscheinlich ein White-Label-Artikel ist – basierend auf
-          Markennamen, Produktdesign und typischen Anzeichen.
-        </p>
-        <br />
-        <p>
-          So kannst du herausfinden, ob du ein echtes Markenprodukt kaufst oder nur einen weiteren
-          umgelabelten Artikel.
-        </p>
-      </div>
+      <h2>Was sind White-Label-Produkte?</h2>
+      <p>
+        White-Label-Produkte werden von Herstellern anonym produziert und anschließend von
+        verschiedenen Händlern unter frei gewählten Markennamen verkauft. Oft sind diese Namen
+        Fantasiewörter, schwer auszusprechen oder wirken austauschbar.
+      </p>
+      <h2>Was macht dieses Tool?</h2>
+      <ul>
+        <li>Es analysiert Produktnamen und Marken auf Auffälligkeiten.</li>
+        <li>Es markiert Produkte, bei denen ein White-Label-Verdacht besteht.</li>
+        <li>Es hilft dir, schneller zu Produkten bekannter Marken zu navigieren.</li>
+      </ul>
+      <p>
+        Wichtig: SiebMalDurch ersetzt keine rechtliche Bewertung und trifft keine endgültigen
+        Aussagen über Qualität oder Herkunft eines Produkts. Es ist ein Hilfswerkzeug zur
+        Orientierung.
+      </p>
     </div>
   );
 }
+
+export default Info;
