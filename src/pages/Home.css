@@ -1,6 +1,6 @@
 /* ROOT */
 .home-page {
-  padding-top: 40px; /* Abstand zum Header */
+  padding-top: 40px;
   color: var(--text);
 }
 
@@ -41,15 +41,12 @@
   max-width: 500px;
   font-size: 16px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
 }
 
-.dark .search-bar input {
-  background: #222;
-  border: 1px solid #444;
-  color: #fff;
-}
-
+/* BUTTON */
 .search-bar button {
   padding: 12px 20px;
   border-radius: 8px;
@@ -96,16 +93,13 @@
   top: 150px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--card-light);
+  background: var(--card);
   padding: 20px;
   border-radius: 10px;
   max-width: 300px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   z-index: 2000;
-}
-
-.dark .info-popup {
-  background: var(--card-dark);
+  color: var(--text);
 }
 
 .info-popup button {
@@ -129,16 +123,13 @@
 
 /* Cards */
 .product-card {
-  background: var(--card-light);
+  background: var(--card);
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   position: relative;
   transition: 0.2s;
-}
-
-.dark .product-card {
-  background: var(--card-dark);
+  color: var(--text);
 }
 
 .product-card:hover {
