@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { searchAmazonMock } from "../api/mockAmazon";
+import { Link } from "react-router-dom";
 import "./Home.css";
 
 function Home() {
@@ -39,7 +40,7 @@ function Home() {
         </div>
       </section>
 
-      {/* WILLKOMMEN – Nur angezeigt, wenn keine Produktsuche aktiv ist */}
+      {/* WILLKOMMEN */}
       {showWelcome && (
         <section className="welcome-box">
           <h2>Willkommen bei SiebMalDurch</h2>
@@ -51,7 +52,7 @@ function Home() {
           <h3>Was bedeutet „White-Label“?</h3>
           <p>
             White-Label-Produkte sind Artikel von anonymen Herstellern, die unter
-            Fantasienamen verkauft werden. Sie sehen wie Markenprodukte aus – sind es aber oft nicht.
+            Fantasienamen verkauft werden.
           </p>
         </section>
       )}
@@ -70,17 +71,24 @@ function Home() {
                 <img src={p.image} alt={p.title} />
               </div>
 
+              {/* CONTENT-BEREICH */}
               <div className="card-content">
                 <h3 className="card-title">{p.title}</h3>
                 <p className="card-brand">{p.brand}</p>
-
                 <p className="card-price">{p.price}</p>
+              </div>
+
+              {/* BUTTON-BLOCK (IMMER UNTEN) */}
+              <div className="card-buttons">
+                <button className="details-btn">
+                  Details
+                </button>
 
                 <a
                   href={p.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="amazon-link"
+                  className="amazon-btn-small"
                 >
                   Auf Amazon ansehen →
                 </a>
