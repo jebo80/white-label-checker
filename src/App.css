@@ -1,14 +1,40 @@
 /* ======================= */
-/* Layout Basis            */
+/* Layout Basis & Global   */
 /* ======================= */
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
 }
 
+/* Farb-Variablen */
+:root {
+  --bg: #ffffff;
+  --text: #222222;
+  --card: #ffffff;
+  --border: #e5e5e5;
+  --blue: #1a75ff;
+}
+
+/* Darkmode überschreibt Variablen */
+.dark {
+  --bg: #111111;
+  --text: #f2f2f2;
+  --card: #222222;
+  --border: #444444;
+}
+
+/* Body-Hintergrund immer aus Variable */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* App-Shell: damit Footer unten bleibt */
 .app-shell {
   min-height: 100%;
   display: flex;
@@ -17,23 +43,11 @@ html, body, #root {
   color: var(--text);
 }
 
-/* ======================= */
-/* Farbvariablen           */
-/* ======================= */
-
-:root {
-  --bg: #ffffff;
-  --text: #222;
-  --card: #ffffff;
-  --border: #e5e5e5;
-  --blue: #1a75ff;
-}
-
-.dark {
-  --bg: #1a1a1a;
-  --text: #eaeaea;
-  --card: #2a2a2a;
-  --border: #333;
+/* Hauptbereich */
+.main-wrapper {
+  flex: 1;
+  padding-top: 90px; /* Platz für Header */
+  background: var(--bg);
 }
 
 /* ======================= */
@@ -59,6 +73,7 @@ html, body, #root {
   justify-content: space-between;
 }
 
+/* Logo / Brand */
 .brand {
   font-size: 22px;
   font-weight: 700;
@@ -66,6 +81,7 @@ html, body, #root {
   text-decoration: none;
 }
 
+/* Navigation */
 .nav-links {
   display: flex;
   gap: 20px;
@@ -77,6 +93,7 @@ html, body, #root {
   font-weight: 500;
 }
 
+/* Rechts: Amazon + Mode-Toggle */
 .header-actions {
   display: flex;
   gap: 12px;
@@ -92,23 +109,15 @@ html, body, #root {
   cursor: pointer;
 }
 
+/* Hell/Dunkel Button – feste Breite */
 .mode-toggle {
   padding: 8px 14px;
-  width: 95px;
+  width: 95px;              /* Wichtig: gleicher Platz für „Hell“ und „Dunkel“ */
   border-radius: 6px;
   border: 1px solid var(--border);
   background: var(--card);
   color: var(--text);
   cursor: pointer;
-}
-
-/* ======================= */
-/* Main Wrapper            */
-/* ======================= */
-
-.main-wrapper {
-  flex: 1;
-  padding-top: 90px;
 }
 
 /* ======================= */
@@ -124,9 +133,8 @@ html, body, #root {
   color: var(--text);
 }
 
-/* Darkmode: Schrift fix hell */
 .dark .footer {
-  color: #ffffff;
+  color: #ffffff; /* explizit hell im Darkmode */
 }
 
 .footer-links {
