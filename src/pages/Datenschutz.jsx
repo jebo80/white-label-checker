@@ -26,7 +26,7 @@ export default function Datenschutz() {
         Jens Bormann<br />
         Rumpfstraße 4<br />
         99986 Niederdorla<br />
-        E-Mail: jenbor80@gmail.com
+        E-Mail: info@siebmaldurch.de
       </p>
 
       <h2>2. Hosting über Vercel</h2>
