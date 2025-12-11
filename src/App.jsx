@@ -62,11 +62,12 @@ function Navigation() {
           </a>
 
           <button
-            onClick={() => setDark(!dark)}
-            className="toggle-btn"
-          >
-            {dark ? "☀️" : "🌙"}
-          </button>
+  onClick={() => setDark(!dark)}
+  className="mode-toggle"
+>
+  {dark ? "☀️ Hellmodus" : "🌙 Dunkelmodus"}
+</button>
+
 
         </div>
       </div>
