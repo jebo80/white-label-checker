@@ -1,64 +1,84 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../ThemeContext";
 
 export default function Impressum() {
-  const pageStyle = {
-    maxWidth: "800px",
-    margin: "40px auto",
+  const { dark } = useContext(ThemeContext);
+
+  const style = {
+    maxWidth: "900px",
+    margin: "50px auto",
     padding: "20px",
-    fontFamily: "Arial, sans-serif",
-    lineHeight: "1.6",
+    lineHeight: "1.7",
+    color: dark ? "#fff" : "#000"
   };
 
   return (
-    <div style={pageStyle}>
+    <div style={style}>
       <h1>Impressum</h1>
 
-      <p><strong>Angaben gemäß § 5 TMG</strong></p>
-
+      <h2>Angaben gemäß § 5 TMG</h2>
       <p>
-        <strong>Name:</strong> Jens Bormann<br />
-        <strong>Adresse:</strong> Rumpfstraße 4<br />
-        99986 Vogtei OT Niederdorla
+        Jens Bormann<br />
+        Rumpfstraße 4<br />
+        99986 Niederdorla
       </p>
 
+      <h2>Kontakt</h2>
       <p>
-        <strong>Kontakt:</strong><br />
-        E-Mail: jenbor80@gmail.com<br />
-        Telefon (optional): ---
+        Telefon: (keine Angabe)<br />
+        E-Mail: jenbor80@gmail.com
       </p>
 
+      <h2>Haftung für Inhalte</h2>
       <p>
-        <strong>Umsatzsteuer-ID:</strong><br />
-        ---<br />
+        Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf
+        diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis
+        10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
+        übermittelte oder gespeicherte fremde Informationen zu überwachen oder
+        nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit
+        hinweisen.
+      </p>
+      <p>
+        Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen
+        nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine
+        diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis
+        einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von
+        entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend
+        entfernen.
       </p>
 
-      <h2>Haftungsausschluss</h2>
-
-      <h3>Haftung für Inhalte</h3>
+      <h2>Haftung für Links</h2>
       <p>
-        Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die
-        Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch
-        keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG
-        für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
-        verantwortlich.
+        Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte
+        wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte
+        auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist
+        stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+      </p>
+      <p>
+        Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche
+        Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der
+        Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der
+        verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer
+        Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen
+        werden wir derartige Links umgehend entfernen.
       </p>
 
-      <h3>Haftung für Links</h3>
-      <p>
-        Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren
-        Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden
-        Inhalte auch keine Gewähr übernehmen.
-      </p>
-
-      <h3>Urheberrecht</h3>
+      <h2>Urheberrecht</h2>
       <p>
         Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen
         Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als
-        solche gekennzeichnet.
+        solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und
+        jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes
+        bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw.
+        Erstellers.
+      </p>
+      <p>
+        Downloads und Kopien dieser Seite sind nur für den privaten, nicht
+        kommerziellen Gebrauch gestattet.
       </p>
 
-      <p>
-        Quelle teilweise: eRecht24
+      <p style={{ marginTop: "40px", opacity: 0.7, fontSize: "14px" }}>
+        Quelle: <a href="https://www.e-recht24.de" target="_blank" rel="noopener noreferrer">e-recht24.de</a>
       </p>
     </div>
   );
