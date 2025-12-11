@@ -7,6 +7,8 @@ import Info from "./pages/Info";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 
+import { Analytics } from "@vercel/analytics/react";
+
 import "./App.css";
 
 function Header() {
@@ -37,7 +39,6 @@ function Header() {
         </nav>
       </div>
 
-      {/* Right Buttons */}
       <div className="header-right">
         <a
           href="https://www.amazon.de/?tag=whitelabelche-21"
@@ -87,6 +88,9 @@ function App() {
           </main>
 
           <Footer />
+
+          {/* Vercel Analytics */}
+          <Analytics />
         </div>
       </Router>
     </ThemeProvider>
