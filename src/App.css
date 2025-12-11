@@ -121,14 +121,11 @@ body {
   background: #ffb84d;
 }
 
-/* ======================================================
-   FIXED MODE TOGGLE (RIGHT SIDE)
-   ====================================================== */
+/* FIXED MODE TOGGLE – RIGHT OF HEADER */
 .mode-toggle-fixed {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  position: fixed;
+  top: 14px;
+  right: 20px;
 
   padding: 8px 14px;
   border-radius: 8px;
@@ -140,6 +137,7 @@ body {
   font-weight: 600;
   font-size: 14px;
   transition: 0.2s;
+  z-index: 2000;
 }
 
 .dark .mode-toggle-fixed {
