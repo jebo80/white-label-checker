@@ -6,7 +6,7 @@ import "./Home.css";
 function Home() {
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState([]);
-  const { theme } = useTheme(); // falls du theme später brauchst
+  const { theme } = useTheme();
 
   const handleSearch = async () => {
     const results = await searchAmazonMock(query);
@@ -14,26 +14,32 @@ function Home() {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
+    if (e.key === "Enter") handleSearch();
   };
 
   return (
     <div className="home-container">
-      <h1 className="home-title">Produktsuche</h1>
 
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Produkt suchen..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={handleKeyPress}
-        />
-        <button onClick={handleSearch}>Suchen</button>
-      </div>
+      {/* HERO */}
+      <section className="hero">
+        <h1 className="hero-title">Finde echte Marken.</h1>
+        <p className="hero-subtitle">
+          SiebMalDurch hilft dir, Produkte schnell und klar zu bewerten.
+        </p>
 
+        <div className="hero-search">
+          <input
+            type="text"
+            placeholder="Produkt suchen..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyPress}
+          />
+          <button onClick={handleSearch}>Suchen</button>
+        </div>
+      </section>
+
+      {/* PRODUKTE */}
       <div className="product-grid">
         {products.map((p, index) => (
           <div key={index} className="product-card">
@@ -42,9 +48,7 @@ function Home() {
             <p className="brand">{p.brand}</p>
 
             {p.isWhiteLabel && (
-              <p className="whitelabel-warning">
-                ⚠️ Möglicherweise White-Label
-              </p>
+              <p className="whitelabel-warning">⚠️ Verdächtig</p>
             )}
 
             <p className="price">{p.price}</p>
@@ -60,6 +64,7 @@ function Home() {
           </div>
         ))}
       </div>
+
     </div>
   );
 }
