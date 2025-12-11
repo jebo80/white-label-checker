@@ -13,29 +13,28 @@ import "./App.css";
 export default function App() {
   return (
     <ThemeProvider>
-  <div className="app-container">
-    <Router>
-      <Navigation />
+      <Router>
+        <div className="app-shell">
+          <Navigation />
 
-      <main className="main-wrapper">
+          <main className="main-wrapper">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/info" element={<Info />} />
+              <Route path="/impressum" element={<Impressum />} />
+              <Route path="/datenschutz" element={<Datenschutz />} />
+            </Routes>
+          </main>
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/info" element={<Info />} />
-            <Route path="/impressum" element={<Impressum />} />
-            <Route path="/datenschutz" element={<Datenschutz />} />
-          </Routes>
-              </main>
-      <Footer />
-    </Router>
-  </div>
-</ThemeProvider>
-
+          <Footer />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
 /* ======================================================
-   Navigation / Header — modern & clean
+   Navigation
    ====================================================== */
 function Navigation() {
   const { dark, setDark } = useContext(ThemeContext);
@@ -44,19 +43,18 @@ function Navigation() {
     <header className={`header ${dark ? "dark" : ""}`}>
       <div className="header-inner">
 
-        {/* Branding */}
-        <Link to="/" className="brand">
-          SiebMalDurch
-        </Link>
+        {/* Logo */}
+        <Link to="/" className="brand">SiebMalDurch</Link>
 
-        {/* Navigation links */}
+        {/* Navigation */}
         <nav className="nav-links">
           <Link to="/">Startseite</Link>
           <Link to="/info">Info</Link>
         </nav>
 
-        {/* Right side (Amazon stays here) */}
+        {/* Buttons rechts */}
         <div className="header-actions">
+
           <a
             href="https://www.amazon.de/?tag=siebmaldurch-21"
             target="_blank"
@@ -64,21 +62,18 @@ function Navigation() {
           >
             <button className="amazon-btn">Amazon</button>
           </a>
+
+          <button
+            onClick={() => setDark(!dark)}
+            className="mode-toggle"
+          >
+            {dark ? "☀️ Hell" : "🌙 Dunkel"}
+          </button>
         </div>
-
-        {/* Mode toggle (separat rechts fixiert) */}
-        <button
-          onClick={() => setDark(!dark)}
-          className="mode-toggle"
-        >
-          {dark ? "☀️ Hell" : "🌙 Dunkel"}
-        </button>
-
       </div>
     </header>
   );
 }
-
 
 /* ======================================================
    Footer
@@ -89,7 +84,6 @@ function Footer() {
   return (
     <footer className={`footer ${dark ? "dark" : ""}`}>
       <h3>SiebMalDurch</h3>
-
       <p className="footer-sub">
         Finde echte Marken – filtere White-Label-Produkte.
       </p>
