@@ -69,7 +69,7 @@ function Navigation() {
         {/* Mode toggle (separat rechts fixiert) */}
         <button
           onClick={() => setDark(!dark)}
-          className="mode-toggle-fixed"
+          className="mode-toggle"
         >
           {dark ? "☀️ Hell" : "🌙 Dunkel"}
         </button>
