@@ -1,31 +1,25 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-export const ThemeContext = createContext();
+const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [dark, setDark] = useState(false);
+  const [theme, setTheme] = useState(() =>
+    localStorage.getItem("theme") || "light"
+  );
 
-  // System Darkmode beim ersten Laden erkennen
   useEffect(() => {
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const saved = localStorage.getItem("darkmode");
+    document.body.className = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-    const isDark = saved === "true" || (saved === null && systemPrefersDark);
-    setDark(isDark);
-
-    // Globale Klasse am <html>-Tag
-    document.documentElement.classList.toggle("dark", isDark);
-  }, []);
-
-  // Änderung speichern + Klasse aktualisieren
-  useEffect(() => {
-    localStorage.setItem("darkmode", dark);
-    document.documentElement.classList.toggle("dark", dark);
-  }, [dark]);
+  const toggleTheme = () =>
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
 
   return (
-    <ThemeContext.Provider value={{ dark, setDark }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 }
+
+export const useTheme = () => useContext(ThemeContext);
