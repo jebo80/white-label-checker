@@ -16,9 +16,9 @@ function Header() {
     <header className="header">
       <div className="header-left">
         <Link to="/" className="brand">
-          <span className="smd smd-s">S</span>ieb
-          <span className="smd smd-m">M</span>al
-          <span className="smd smd-d">D</span>urch
+          <span className="brand-accent">S</span>ieb
+          <span className="brand-accent">M</span>al
+          <span className="brand-accent">D</span>urch
         </Link>
 
         <nav className="nav">
