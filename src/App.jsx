@@ -33,12 +33,25 @@ function Header() {
           </div>
         </div>
 
-        {/* RIGHT: THEME + BURGER */}
+        {/* RIGHT: CONTROLS */}
         <div className="header-controls">
+
+          {/* Amazon button now inside the top row (desktop fix) */}
+          <a
+            href="https://www.amazon.de"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="amazon-btn header-amazon-btn"
+          >
+            Amazon
+          </a>
+
+          {/* Theme toggle */}
           <button className="theme-btn" onClick={toggleTheme}>
             {theme === "light" ? "🌙" : "☀️"}
           </button>
 
+          {/* Burger menu toggle */}
           <button className="burger-btn" onClick={toggleMenu}>
             ☰
           </button>
@@ -46,8 +59,8 @@ function Header() {
 
       </div>
 
-      {/* AMAZON BUTTON ALWAYS VISIBLE */}
-      <div className="header-amazon-row">
+      {/* MOBILE-ONLY Amazon row — only visible on small screens */}
+      <div className="mobile-amazon-row">
         <a
           href="https://www.amazon.de"
           target="_blank"
