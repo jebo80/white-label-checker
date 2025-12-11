@@ -41,7 +41,7 @@ function Home() {
         </div>
       </section>
 
-      {/* WILLKOMMEN */}
+      {/* WELCOME BOX */}
       {showWelcome && (
         <section className="welcome-box">
           <h2>Willkommen bei SiebMalDurch</h2>
@@ -58,14 +58,16 @@ function Home() {
         </section>
       )}
 
-      {/* DETAILVIEW */}
+      {/* DETAIL VIEW */}
       {selectedProduct && (
         <div className="detail-view">
+
           <button className="back-button" onClick={() => setSelectedProduct(null)}>
             ← Zurück zu den Ergebnissen
           </button>
 
           <div className="detail-content">
+
             <div className="detail-image">
               <img src={selectedProduct.image} alt={selectedProduct.title} />
             </div>
@@ -84,17 +86,18 @@ function Home() {
                 Auf Amazon ansehen →
               </a>
             </div>
+
           </div>
         </div>
       )}
 
-      {/* GRID */}
+      {/* PRODUCT GRID */}
       {!selectedProduct && (
         <div className="results-section">
           <div className="product-grid">
             {products.map((p, index) => (
               <div key={index} className="product-card">
-                
+
                 {p.isWhiteLabel && <div className="wl-badge">Verdacht</div>}
 
                 {/* Bild + Overlay */}
@@ -103,12 +106,12 @@ function Home() {
                   onClick={() => setSelectedProduct(p)}
                 >
                   <img src={p.image} alt={p.title} />
+
                   <div className="card-overlay">
-                    Für Details bitte klicken
+                    Details ansehen
                   </div>
                 </div>
 
-                {/* Content */}
                 <div className="card-content">
                   <h3 className="card-title">{p.title}</h3>
                   <p className="card-brand">{p.brand}</p>
