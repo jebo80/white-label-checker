@@ -3,7 +3,7 @@
    ====================================================== */
 body {
   margin: 0;
-  font-family: 'Poppins', Arial, sans-serif;
+  font-family: 'Poppins', system-ui, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   transition: 0.25s ease;
@@ -70,13 +70,12 @@ body {
 
 /* Brand name */
 .brand {
-  font-family: 'Poppins';
-  font-weight: 700;
   font-size: 24px;
-  color: var(--blue);
+  font-weight: 700;
   text-decoration: none;
+  color: var(--blue);
+  font-family: 'Poppins';
 }
-
 
 /* Navigation links */
 .nav-links {
@@ -119,18 +118,28 @@ body {
   background: #ffb84d;
 }
 
-/* Darkmode toggle */
-.toggle-btn {
-  background: var(--card-light);
+/* ======================================================
+   NEW DARKMODE BUTTON (TEXT + ICON)
+   ====================================================== */
+.mode-toggle {
+  padding: 8px 14px;
+  border-radius: 8px;
   border: none;
-  border-radius: 6px;
-  padding: 6px 12px;
   cursor: pointer;
+  background: var(--card-light);
+  color: var(--text);
+  font-weight: 600;
+  transition: 0.2s;
+  font-size: 14px;
 }
 
-.dark .toggle-btn {
+.dark .mode-toggle {
   background: #333;
-  color: white;
+  color: #fff;
+}
+
+.mode-toggle:hover {
+  opacity: 0.85;
 }
 
 /* ======================================================
