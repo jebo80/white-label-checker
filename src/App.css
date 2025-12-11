@@ -19,7 +19,7 @@
 }
 
 /* ================================
-   HELLERER DARKMODE
+   H E L L E R E R   D A R K M O D E
 ================================ */
 body.dark {
   --bg: #1a1c22;
@@ -58,7 +58,7 @@ main {
    HEADER
 ================================ */
 .header {
-  height: 76px;
+  height: 95px;
   background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -70,8 +70,36 @@ main {
   z-index: 50;
 }
 
+/* LEFT BLOCK (Logo + Brand + Nav) */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+/* LOGO-KREIS */
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+/* BRAND + SUBHEADLINE */
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
 .brand {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: 700;
   text-decoration: none;
   color: var(--text);
@@ -81,29 +109,39 @@ main {
   color: var(--primary);
 }
 
+.brand-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: -2px;
+}
+
+/* NAVIGATION */
 .nav {
   display: flex;
-  gap: 24px;
-  margin-left: 24px;
+  gap: 26px;
 }
 
 .nav a {
   text-decoration: none;
   color: var(--text);
   font-weight: 500;
+  font-size: 1.05rem;
 }
 
 .nav a:hover {
   color: var(--primary);
 }
 
-/* Header Right */
+/* ================================
+   HEADER RIGHT
+================================ */
 .header-right {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
+/* AMAZON BUTTON */
 .amazon-btn {
   padding: 10px 18px;
   background: #f7a600;
@@ -114,6 +152,7 @@ main {
   text-decoration: none;
 }
 
+/* THEME SWITCH */
 .theme-btn {
   width: 70px;
   height: 38px;
