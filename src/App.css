@@ -1,6 +1,4 @@
-/* =======================================
-   GLOBAL VARIABLES
-======================================= */
+/* GLOBAL */
 :root {
   --primary: #4aa8ff;
   --primary-dark: #1f7ed6;
@@ -8,81 +6,63 @@
   --bg: #ffffff;
   --bg-alt: #f5f7fa;
 
-  --text: #111111;
+  --text: #111;
   --text-muted: #6b7280;
 
-  --card-bg: #ffffff;
+  --card-bg: #fff;
   --border: #d6d9df;
 
   --radius: 12px;
-  --shadow: 0 4px 14px rgba(0,0,0,0.08);
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* DARKMODE */
 body.dark {
   --bg: #1a1c22;
   --bg-alt: #23262d;
 
-  --text: #e9e9eb;
+  --text: #eee;
   --text-muted: #b3b3b7;
 
   --card-bg: #262a31;
   --border: #3a3f47;
 
-  --shadow: 0 4px 18px rgba(0,0,0,0.4);
+  --shadow: 0 4px 18px rgba(0,0,0,0.3);
 }
 
-/* Prevent ALL horizontal scroll */
+/* Overflow prevent */
 html, body {
   overflow-x: hidden;
-}
-
-/* =======================================
-   BASE STYLES
-======================================= */
-body {
   margin: 0;
+  padding: 0;
   background: var(--bg);
   color: var(--text);
   font-family: "Inter", sans-serif;
 }
 
-.app-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
-}
-
-/* =======================================
-   HEADER
-======================================= */
+/* HEADER */
 .header {
   width: 100%;
   background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow);
-  padding: 12px 22px;
   position: sticky;
   top: 0;
   z-index: 200;
+  padding: 14px 22px;
 }
 
-/* HEADER TOP ROW */
-.header-top {
+/* Flex main header row */
+.header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* LEFT BLOCK */
+/* LEFT */
 .header-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .brand-logo {
@@ -90,12 +70,6 @@ main {
   height: 34px;
   border-radius: 50%;
   background: var(--primary);
-  box-shadow: var(--shadow);
-}
-
-.brand-text {
-  display: flex;
-  flex-direction: column;
 }
 
 .brand {
@@ -109,22 +83,46 @@ main {
   color: var(--primary);
 }
 
-.brand-sub {
-  font-size: 0.75rem;
-  margin-top: -4px;
-  color: var(--text-muted);
+/* NAV DESKTOP */
+.nav-desktop {
+  display: flex;
+  gap: 24px;
 }
 
-/* RIGHT BLOCK */
-.header-controls {
+.nav-desktop a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.nav-desktop a:hover {
+  color: var(--primary);
+}
+
+/* RIGHT */
+.header-right {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
+}
+
+.amazon-btn {
+  padding: 9px 18px;
+  background: #f7a600;
+  border-radius: var(--radius);
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.amazon-btn:hover {
+  background: #ffb72b;
 }
 
 .theme-btn {
-  width: 60px;
-  height: 34px;
+  width: 52px;
+  height: 32px;
   border-radius: var(--radius);
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -133,6 +131,12 @@ main {
   color: var(--text);
 }
 
+/* MOBILE ONLY ELEMENTS HIDDEN ON DESKTOP */
+.mobile-only {
+  display: none;
+}
+
+/* MOBILE BURGER STYLES */
 .burger-btn {
   background: none;
   border: none;
@@ -141,36 +145,14 @@ main {
   cursor: pointer;
 }
 
-/* Amazon button INSIDE header-controls (Desktop) */
-.header-amazon-btn {
-  display: inline-block;
-}
-
-/* Mobile Amazon row hidden by default */
+/* MOBILE AMAZON ROW */
 .mobile-amazon-row {
   display: none;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
-/* Amazon button general */
-.amazon-btn {
-  padding: 10px 20px;
-  background: #f7a600;
-  color: #111;
-  border-radius: var(--radius);
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-block;
-}
-
-.amazon-btn:hover {
-  background: #ffb72b;
-}
-
-/* =======================================
-   MOBILE MENU (SLIDE DOWN)
-======================================= */
+/* MOBILE MENU */
 .mobile-menu {
   width: 100%;
   max-height: 0;
@@ -197,17 +179,10 @@ main {
 .mobile-nav a {
   text-decoration: none;
   color: var(--text);
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.15rem;
 }
 
-.mobile-nav a:hover {
-  color: var(--primary);
-}
-
-/* =======================================
-   FOOTER
-======================================= */
+/* FOOTER */
 .footer {
   background: var(--bg-alt);
   padding: 24px 10px;
@@ -218,84 +193,47 @@ main {
 .footer-nav {
   display: flex;
   justify-content: center;
+  gap: 24px;
   flex-wrap: wrap;
-  gap: 26px;
-  margin-bottom: 10px;
-}
-
-.footer-nav a {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 500;
-}
-
-.footer-nav a:hover {
-  color: var(--primary);
 }
 
 .footer-copy {
+  margin-top: 8px;
   font-size: 0.85rem;
   color: var(--text-muted);
 }
 
 /* =======================================
-   RESPONSIVE BREAKPOINTS
+   RESPONSIVE
 ======================================= */
 
 /* TABLET */
 @media (max-width: 1024px) {
   .brand {
-    font-size: 1.55rem;
+    font-size: 1.5rem;
   }
 }
 
 /* SMARTPHONE */
 @media (max-width: 768px) {
 
-  .header {
-    padding: 10px 14px; /* FIX Overflow */
-  }
-
-  /* header controls tighter */
-  .header-controls {
-    gap: 12px;
-  }
-
-  .theme-btn {
-    width: 52px;
-    height: 32px;
-  }
-
-  .burger-btn {
-    font-size: 1.8rem;
-  }
-
-  /* Desktop Amazon hidden */
-  .header-amazon-btn {
+  /* hide desktop nav */
+  .nav-desktop {
     display: none;
   }
 
-  /* Mobile Amazon visible */
-  .mobile-amazon-row {
+  /* show mobile elements */
+  .mobile-only {
     display: block;
-    margin-top: 12px;
   }
 
-  .amazon-btn {
-    padding: 8px 18px;
-    font-size: 0.95rem;
-  }
-
-  .brand-sub {
+  .desktop-only {
     display: none;
   }
-}
 
-/* SMALL SMARTPHONES */
-@media (max-width: 480px) {
-
-  .brand {
-    font-size: 1.25rem;
+  /* header spacing */
+  .header {
+    padding: 10px 14px;
   }
 
   .theme-btn {
@@ -304,15 +242,22 @@ main {
   }
 
   .burger-btn {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   }
 
-  /* Allow menu extra room */
+  /* mobile amazon */
+  .mobile-amazon-row {
+    display: block;
+  }
+}
+
+/* SMALL SMARTPHONES */
+@media (max-width: 480px) {
+  .brand {
+    font-size: 1.25rem;
+  }
+
   .mobile-menu.open {
-    max-height: 260px;
-  }
-
-  .amazon-btn {
-    font-size: 0.85rem;
+    max-height: 300px;
   }
 }
