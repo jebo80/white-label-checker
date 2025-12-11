@@ -182,45 +182,48 @@
 
 
 /* ============================
-   BUTTON-BEREICH Unten fixiert
+   BUTTON-BEREICH
 ============================ */
 .card-buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
   padding: 18px;
   margin-top: auto;
 }
 
-.details-btn {
+/* Beide Buttons jetzt 75% Breite */
+.details-btn,
+.amazon-btn-small {
+  width: 75%;
   padding: 12px 0;
-  width: 100%;
   border-radius: var(--radius);
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  font-size: 0.95rem;
+}
+
+/* Details Button – Blau */
+.details-btn {
+  background: var(--primary);
+  border: none;
+  color: #fff;
 }
 
 .details-btn:hover {
   background: var(--primary-dark);
 }
 
+/* Amazon Button – Amazon Orange */
 .amazon-btn-small {
+  background: #f7a600;
+  border: 1px solid #d68a00;
+  color: #111;
   text-align: center;
-  padding: 10px 0;
-  width: 100%;
-  border-radius: var(--radius);
-  background: var(--bg-alt);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-weight: 600;
-  font-size: 0.9rem;
   text-decoration: none;
 }
 
 .amazon-btn-small:hover {
-  background: var(--border);
+  background: #ffb72b;
 }
