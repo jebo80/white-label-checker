@@ -58,16 +58,18 @@ function Home() {
         </section>
       )}
 
-      {/* =============================================
-          DETAILVIEW
-      ============================================= */}
+      {/* ===============================
+          DETAIL ANSICHT
+      ================================ */}
       {selectedProduct && (
         <div className="detail-view">
+
           <button className="back-button" onClick={() => setSelectedProduct(null)}>
             ← Zurück zu den Ergebnissen
           </button>
 
           <div className="detail-content">
+
             <div className="detail-image">
               <img src={selectedProduct.image} alt={selectedProduct.title} />
             </div>
@@ -86,13 +88,14 @@ function Home() {
                 Auf Amazon ansehen →
               </a>
             </div>
+
           </div>
         </div>
       )}
 
-      {/* =============================================
-          PRODUKTGRID
-      ============================================= */}
+      {/* ===============================
+          PRODUKT-GRID
+      ================================ */}
       {!selectedProduct && (
         <div className="results-section">
           <div className="product-grid">
@@ -101,16 +104,14 @@ function Home() {
 
                 {p.isWhiteLabel && <div className="wl-badge">Verdacht</div>}
 
-                {/* KLICKBARES BILD */}
+                {/* Bild + Hinweistext in EINER Box */}
                 <div
                   className="card-image-wrapper clickable"
                   onClick={() => setSelectedProduct(p)}
                 >
                   <img src={p.image} alt={p.title} />
+                  <div className="image-hint">Für Details bitte aufs Bild klicken</div>
                 </div>
-
-                {/* Hinweistext */}
-                <div className="image-hint">Für Details aufs Bild klicken</div>
 
                 {/* Inhalt */}
                 <div className="card-content">
@@ -121,7 +122,7 @@ function Home() {
                 {/* Preis */}
                 <div className="card-price">{p.price} €</div>
 
-                {/* Unterer Bereich – NUR Amazon Button */}
+                {/* Unterer Bereich (nur Amazon Button) */}
                 <div className="card-lower">
                   <a
                     href={p.url}
