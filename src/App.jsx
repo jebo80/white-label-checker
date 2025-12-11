@@ -1,93 +1,57 @@
-// src/App.jsx
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+import { ThemeProvider, useTheme } from "./ThemeContext";
 
 import Home from "./pages/Home";
 import Info from "./pages/Info";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 
-import { ThemeProvider, ThemeContext } from "./ThemeContext";
+import { Analytics } from "@vercel/analytics/react";
 import "./App.css";
 
-export default function App() {
-  return (
-    <ThemeProvider>
-      <Router>
-        <div className="app-shell">
-          <Navigation />
-
-          <main className="main-wrapper">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/info" element={<Info />} />
-              <Route path="/impressum" element={<Impressum />} />
-              <Route path="/datenschutz" element={<Datenschutz />} />
-            </Routes>
-          </main>
-
-          <Footer />
-        </div>
-      </Router>
-    </ThemeProvider>
-  );
-}
-
-/* ======================================================
-   Navigation
-   ====================================================== */
-function Navigation() {
-  const { dark, setDark } = useContext(ThemeContext);
+function Header() {
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className={`header ${dark ? "dark" : ""}`}>
-      <div className="header-inner">
+    <header className="header">
 
-        {/* Logo */}
-        <Link to="/" className="brand">SiebMalDurch</Link>
-
-        {/* Navigation */}
-        <nav className="nav-links">
-          <Link to="/">Startseite</Link>
-          <Link to="/info">Info</Link>
-        </nav>
-
-        {/* Buttons rechts */}
-        <div className="header-actions">
-
-          <a
-            href="https://www.amazon.de/?tag=siebmaldurch-21"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button className="amazon-btn">Amazon</button>
-          </a>
-
-          <button
-            onClick={() => setDark(!dark)}
-            className="mode-toggle"
-          >
-            {dark ? "☀️ Hell" : "🌙 Dunkel"}
-          </button>
-        </div>
+      <div className="header-left">
+        <Link to="/" className="brand">
+          Sieb<span className="brand-accent">Mal</span>Durch
+        </Link>
       </div>
+
+      <nav className="header-nav">
+        <Link to="/">Startseite</Link>
+        <Link to="/info">Info</Link>
+        <Link to="/impressum">Impressum</Link>
+        <Link to="/datenschutz">Datenschutz</Link>
+      </nav>
+
+      <div className="header-right">
+        <a
+          href="https://www.amazon.de"
+          target="_blank"
+          rel="noreferrer"
+          className="amazon-btn"
+        >
+          Amazon
+        </a>
+
+        <button className="theme-btn" onClick={toggleTheme}>
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+      </div>
+
     </header>
   );
 }
 
-/* ======================================================
-   Footer
-   ====================================================== */
 function Footer() {
-  const { dark } = useContext(ThemeContext);
-
   return (
-    <footer className={`footer ${dark ? "dark" : ""}`}>
-      <h3>SiebMalDurch</h3>
-      <p className="footer-sub">
-        Finde echte Marken – filtere White-Label-Produkte.
-      </p>
-
+    <footer className="footer">
       <div className="footer-links">
         <Link to="/">Startseite</Link>
         <Link to="/info">Info</Link>
@@ -95,13 +59,29 @@ function Footer() {
         <Link to="/datenschutz">Datenschutz</Link>
       </div>
 
-      <p className="footer-copy">
-        © {new Date().getFullYear()} SiebMalDurch – Ein unabhängiges Amazon-Tool*
-      </p>
-
-      <p className="footer-hinweis">
-        *Amazon ist eine eingetragene Marke. Diese Seite steht in keiner Verbindung zu Amazon.
-      </p>
+      <p className="footer-copy">© 2025 SiebMalDurch</p>
     </footer>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <Router>
+        <Header />
+
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/info" element={<Info />} />
+            <Route path="/impressum" element={<Impressum />} />
+            <Route path="/datenschutz" element={<Datenschutz />} />
+          </Routes>
+        </main>
+
+        <Footer />
+        <Analytics />
+      </Router>
+    </ThemeProvider>
   );
 }
