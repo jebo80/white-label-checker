@@ -201,34 +201,39 @@
   border-radius: 6px;
 }
 
-/* IMAGE */
+
+/* ============================
+   IMAGE BLOCK (Bild + Hinweis)
+============================ */
 .card-image-wrapper {
   width: 100%;
-  height: 190px;
+  height: 210px;
   background: var(--bg-alt);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 6px;
+  padding-top: 10px;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
 }
 
 .card-image-wrapper img {
   width: 80%;
-  height: 80%;
+  height: 75%;
   object-fit: contain;
 }
 
-/* Hinweis unter Bild */
 .image-hint {
-  text-align: center;
   font-size: 0.8rem;
   color: var(--text-muted);
-  padding: 6px 0;
 }
 
 
-/* CONTENT */
+/* ============================
+   CONTENT
+============================ */
 .card-content {
   padding: 18px;
   text-align: center;
@@ -267,7 +272,7 @@
 
 
 /* ============================
-   UNTERER BLOCK — angepasst
+   UNTERER BEREICH
 ============================ */
 .card-lower {
   background: var(--bg-alt);
