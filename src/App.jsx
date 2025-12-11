@@ -25,10 +25,12 @@ export default function App() {
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
           </Routes>
-        </main>
-        <Footer />
-      </Router>
-    </ThemeProvider>
+              </main>
+      <Footer />
+    </Router>
+  </div>
+</ThemeProvider>
+
   );
 }
 
