@@ -39,7 +39,7 @@ function Home() {
         </div>
       </section>
 
-      {/* WILLKOMMEN – Nur sichtbar wenn keine Ergebnisse */}
+      {/* WILLKOMMEN – Nur angezeigt, wenn keine Produktsuche aktiv ist */}
       {showWelcome && (
         <section className="welcome-box">
           <h2>Willkommen bei SiebMalDurch</h2>
@@ -56,30 +56,36 @@ function Home() {
         </section>
       )}
 
-      {/* PRODUKTERGEBNISSE */}
+      {/* PRODUKTE */}
       <div className="results-section">
         <div className="product-grid">
           {products.map((p, index) => (
             <div key={index} className="product-card">
-              <img src={p.image} alt={p.title} />
-
-              <h3>{p.title}</h3>
-              <p className="brand">{p.brand}</p>
 
               {p.isWhiteLabel && (
-                <p className="whitelabel-warning">⚠ Verdacht auf White-Label</p>
+                <div className="wl-badge">Verdacht</div>
               )}
 
-              <p className="price">{p.price}</p>
+              <div className="card-image-wrapper">
+                <img src={p.image} alt={p.title} />
+              </div>
 
-              <a
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="amazon-link"
-              >
-                Auf Amazon ansehen →
-              </a>
+              <div className="card-content">
+                <h3 className="card-title">{p.title}</h3>
+                <p className="card-brand">{p.brand}</p>
+
+                <p className="card-price">{p.price}</p>
+
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="amazon-link"
+                >
+                  Auf Amazon ansehen →
+                </a>
+              </div>
+
             </div>
           ))}
         </div>
