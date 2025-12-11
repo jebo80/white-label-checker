@@ -15,18 +15,29 @@ function Header() {
   return (
     <header className="header">
       <div className="header-left">
-        <Link to="/" className="brand">
-          <span className="brand-accent">S</span>ieb
-          <span className="brand-accent">M</span>al
-          <span className="brand-accent">D</span>urch
-        </Link>
 
+        {/* Logo + Brand */}
+        <div className="brand-block">
+          <div className="brand-logo"></div>
+
+          <div className="brand-text">
+            <Link to="/" className="brand">
+              <span className="brand-accent">S</span>ieb
+              <span className="brand-accent">M</span>al
+              <span className="brand-accent">D</span>urch
+            </Link>
+            <div className="brand-sub">Analyse-Tool für Markenprodukte</div>
+          </div>
+        </div>
+
+        {/* Navigation */}
         <nav className="nav">
           <Link to="/">Startseite</Link>
           <Link to="/info">Info</Link>
         </nav>
       </div>
 
+      {/* Right Buttons */}
       <div className="header-right">
         <a
           href="https://www.amazon.de/?tag=whitelabelche-21"
