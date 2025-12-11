@@ -1,23 +1,72 @@
-// src/App.jsx
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { ThemeProvider, useTheme } from "./ThemeContext";
 
 import Home from "./pages/Home";
 import Info from "./pages/Info";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 
-import { ThemeProvider, ThemeContext } from "./ThemeContext";
 import "./App.css";
 
-export default function App() {
+function Header() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <header className="header">
+      <div className="header-left">
+        <Link to="/" className="brand">
+          <span className="smd smd-s">S</span>ieb
+          <span className="smd smd-m">M</span>al
+          <span className="smd smd-d">D</span>urch
+        </Link>
+
+        <nav className="nav">
+          <Link to="/">Startseite</Link>
+          <Link to="/info">Info</Link>
+        </nav>
+      </div>
+
+      <div className="header-right">
+        <a
+          href="https://www.amazon.de/?tag=whitelabelche-21"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="amazon-btn"
+        >
+          Amazon
+        </a>
+
+        <button className="theme-btn" onClick={toggleTheme}>
+          {theme === "dark" ? "☀️" : "🌙"}
+        </button>
+      </div>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-links">
+        <Link to="/">Startseite</Link>
+        <Link to="/info">Info</Link>
+        <Link to="/impressum">Impressum</Link>
+        <Link to="/datenschutz">Datenschutz</Link>
+      </div>
+      <p className="footer-copy">© {new Date().getFullYear()} SiebMalDurch.de</p>
+    </footer>
+  );
+}
+
+function App() {
   return (
     <ThemeProvider>
       <Router>
-        <div className="app-shell">
-          <Navigation />
+        <div className="app-container">
+          <Header />
 
-          <main className="main-wrapper">
+          <main className="main">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/info" element={<Info />} />
@@ -33,75 +82,4 @@ export default function App() {
   );
 }
 
-/* ======================================================
-   Navigation
-   ====================================================== */
-function Navigation() {
-  const { dark, setDark } = useContext(ThemeContext);
-
-  return (
-    <header className={`header ${dark ? "dark" : ""}`}>
-      <div className="header-inner">
-
-        {/* Logo */}
-        <Link to="/" className="brand">SiebMalDurch</Link>
-
-        {/* Navigation */}
-        <nav className="nav-links">
-          <Link to="/">Startseite</Link>
-          <Link to="/info">Info</Link>
-        </nav>
-
-        {/* Buttons rechts */}
-        <div className="header-actions">
-
-          <a
-            href="https://www.amazon.de/?tag=siebmaldurch-21"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button className="amazon-btn">Amazon</button>
-          </a>
-
-          <button
-            onClick={() => setDark(!dark)}
-            className="mode-toggle"
-          >
-            {dark ? "☀️ Hell" : "🌙 Dunkel"}
-          </button>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-/* ======================================================
-   Footer
-   ====================================================== */
-function Footer() {
-  const { dark } = useContext(ThemeContext);
-
-  return (
-    <footer className={`footer ${dark ? "dark" : ""}`}>
-      <h3>SiebMalDurch</h3>
-      <p className="footer-sub">
-        Finde echte Marken – filtere White-Label-Produkte.
-      </p>
-
-      <div className="footer-links">
-        <Link to="/">Startseite</Link>
-        <Link to="/info">Info</Link>
-        <Link to="/impressum">Impressum</Link>
-        <Link to="/datenschutz">Datenschutz</Link>
-      </div>
-
-      <p className="footer-copy">
-        © {new Date().getFullYear()} SiebMalDurch – Ein unabhängiges Amazon-Tool*
-      </p>
-
-      <p className="footer-hinweis">
-        *Amazon ist eine eingetragene Marke. Diese Seite steht in keiner Verbindung zu Amazon.
-      </p>
-    </footer>
-  );
-}
+export default App;
