@@ -53,7 +53,39 @@
 }
 
 /* ============================
-   PRODUKTGRID
+   WELCOME SECTION
+============================ */
+.welcome-box {
+  max-width: 800px;
+  margin: 40px auto 20px auto;
+  padding: 30px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.welcome-box h2 {
+  margin: 0 0 14px;
+  font-size: 1.8rem;
+  color: var(--text);
+}
+
+.welcome-box h3 {
+  margin-top: 26px;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.welcome-box p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* ============================
+   RESULTS
 ============================ */
 .results-section {
   padding: 40px 20px;
