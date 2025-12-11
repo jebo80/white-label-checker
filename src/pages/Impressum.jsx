@@ -26,7 +26,7 @@ export default function Impressum() {
       <h2>Kontakt</h2>
       <p>
         Telefon: (keine Angabe)<br />
-        E-Mail: jenbor80@gmail.com
+        E-Mail: info@siebmaldurch.de
       </p>
 
       <h2>Haftung für Inhalte</h2>
