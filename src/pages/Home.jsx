@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { searchAmazonMock } from "../api/mockAmazon";
-import { Link } from "react-router-dom";
 import "./Home.css";
 
 function Home() {
@@ -57,32 +56,32 @@ function Home() {
         </section>
       )}
 
-      {/* PRODUKTE */}
+      {/* PRODUKTKACHELN */}
       <div className="results-section">
         <div className="product-grid">
           {products.map((p, index) => (
             <div key={index} className="product-card">
 
-              {p.isWhiteLabel && (
-                <div className="wl-badge">Verdacht</div>
-              )}
+              {p.isWhiteLabel && <div className="wl-badge">Verdacht</div>}
 
               <div className="card-image-wrapper">
                 <img src={p.image} alt={p.title} />
               </div>
 
-              {/* CONTENT-BEREICH */}
+              {/* Content */}
               <div className="card-content">
                 <h3 className="card-title">{p.title}</h3>
                 <p className="card-brand">{p.brand}</p>
-                <p className="card-price">{p.price}</p>
               </div>
 
-              {/* BUTTON-BLOCK (IMMER UNTEN) */}
+              {/* Preis jetzt direkt über den Buttons */}
+              <div className="card-price">
+                {p.price} €
+              </div>
+
+              {/* BUTTONs */}
               <div className="card-buttons">
-                <button className="details-btn">
-                  Details
-                </button>
+                <button className="details-btn">Details</button>
 
                 <a
                   href={p.url}
