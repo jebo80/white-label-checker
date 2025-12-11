@@ -1,5 +1,5 @@
 /* ================================
-   GLOBAL FARBSYSTEM
+   GLOBAL VARIABLES
 ================================ */
 :root {
   --primary: #4aa8ff;
@@ -18,9 +18,7 @@
   --shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 
-/* ================================
-   HELLERER DARKMODE
-================================ */
+/* DARKMODE */
 body.dark {
   --bg: #1a1c22;
   --bg-alt: #23262d;
@@ -29,13 +27,13 @@ body.dark {
   --text-muted: #b3b3b7;
 
   --card-bg: #262a31;
-  --border: #393d45;
+  --border: #3a3f47;
 
-  --shadow: 0 4px 20px rgba(0,0,0,0.35);
+  --shadow: 0 4px 18px rgba(0,0,0,0.4);
 }
 
 /* ================================
-   BASE
+   BASE STYLES
 ================================ */
 body {
   margin: 0;
@@ -58,26 +56,30 @@ main {
    HEADER
 ================================ */
 .header {
-  height: 95px;
+  width: 100%;
   background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 12px 22px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* HEADER TOP ROW */
+.header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 28px;
-  position: sticky;
-  top: 0;
-  z-index: 50;
 }
 
 /* LEFT BLOCK */
 .header-left {
   display: flex;
   align-items: center;
-  gap: 42px;
+  gap: 16px;
 }
 
-/* LOGO */
 .brand-logo {
   width: 34px;
   height: 34px;
@@ -86,22 +88,15 @@ main {
   box-shadow: var(--shadow);
 }
 
-/* BRAND TEXT */
-.brand-block {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
 .brand-text {
   display: flex;
   flex-direction: column;
 }
 
 .brand {
+  text-decoration: none;
   font-size: 1.7rem;
   font-weight: 700;
-  text-decoration: none;
   color: var(--text);
 }
 
@@ -110,147 +105,204 @@ main {
 }
 
 .brand-sub {
-  font-size: 0.82rem;
+  font-size: 0.75rem;
+  margin-top: -4px;
   color: var(--text-muted);
-  margin-top: -2px;
 }
 
-/* NAVI */
-.nav {
-  display: flex;
-  gap: 26px;
-}
-
-.nav a {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 500;
-  font-size: 1.05rem;
-}
-
-.nav a:hover {
-  color: var(--primary);
-}
-
-/* RIGHT */
-.header-right {
+/* RIGHT BLOCK */
+.header-controls {
   display: flex;
   align-items: center;
-  gap: 20px;
-}
-
-.amazon-btn {
-  padding: 10px 18px;
-  background: #f7a600;
-  border: none;
-  border-radius: var(--radius);
-  color: #111;
-  font-weight: 600;
-  text-decoration: none;
+  gap: 18px;
 }
 
 .theme-btn {
-  width: 70px;
-  height: 38px;
+  width: 60px;
+  height: 34px;
   border-radius: var(--radius);
-  border: 1px solid var(--border);
   background: var(--card-bg);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.burger-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
   color: var(--text);
   cursor: pointer;
 }
 
+/* AMAZON ROW ALWAYS VISIBLE */
+.header-amazon-row {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.amazon-btn {
+  padding: 10px 22px;
+  background: #f7a600;
+  color: #111;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.amazon-btn:hover {
+  background: #ffb72b;
+}
+
 /* ================================
-   RESPONSIVE DESIGN
+   MOBILE MENU (SLIDE DOWN)
+================================ */
+.mobile-menu {
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  transition: height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.mobile-menu.open {
+  height: 180px;
+  opacity: 1;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px 0;
+  text-align: center;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.mobile-nav a:hover {
+  color: var(--primary);
+}
+
+/* ================================
+   FOOTER
+================================ */
+.footer {
+  background: var(--bg-alt);
+  padding: 24px 10px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin-bottom: 10px;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.footer-nav a:hover {
+  color: var(--primary);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ================================
+   RESPONSIVE BREAKPOINTS
 ================================ */
 
-/* --- Tablet (<= 1024px) --- */
+/* TABLET */
 @media (max-width: 1024px) {
-  .header {
-    padding: 0 18px;
-  }
   .brand {
-    font-size: 1.45rem;
-  }
-  .nav {
-    gap: 18px;
-  }
-  .amazon-btn {
-    padding: 8px 16px;
+    font-size: 1.55rem;
   }
 }
 
-/* --- Smartphones (<= 768px) --- */
+/* SMARTPHONE (PRIME) */
 @media (max-width: 768px) {
 
   .header {
-    height: auto;
     padding: 12px 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
   }
 
+  /* Header top row spacing */
   .header-left {
-    width: 100%;
-    justify-content: space-between;
-    gap: 20px;
-  }
-
-  .brand-logo {
-    width: 28px;
-    height: 28px;
+    gap: 12px;
   }
 
   .brand {
-    font-size: 1.4rem;
+    font-size: 1.45rem;
   }
 
   .brand-sub {
-    display: none; /* für mobile clean */
-  }
-
-  /* Navigation UNTER die Brand */
-  .nav {
-    width: 100%;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .header-right {
-    width: 100%;
-    justify-content: center;
-    gap: 16px;
-  }
-
-  .amazon-btn {
-    padding: 8px 14px;
-    font-size: 0.9rem;
+    display: none;
   }
 
   .theme-btn {
-    width: 55px;
+    width: 52px;
     height: 32px;
+  }
+
+  .burger-btn {
+    font-size: 1.8rem;
+  }
+
+  /* Amazon button */
+  .header-amazon-row {
+    margin-top: 12px;
+  }
+
+  .amazon-btn {
+    padding: 8px 18px;
+    font-size: 0.95rem;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    gap: 18px;
   }
 }
 
-/* --- Extra schmale Smartphones (<= 480px) --- */
+/* SMALL SMARTPHONES */
 @media (max-width: 480px) {
 
   .brand {
     font-size: 1.25rem;
   }
 
-  .nav a {
-    font-size: 0.9rem;
+  .theme-btn {
+    width: 46px;
+    height: 30px;
+  }
+
+  .burger-btn {
+    font-size: 1.6rem;
   }
 
   .amazon-btn {
     font-size: 0.85rem;
-    padding: 8px 12px;
   }
 
-  .theme-btn {
-    width: 50px;
-    height: 30px;
+  .mobile-menu.open {
+    height: 200px;
   }
 }
