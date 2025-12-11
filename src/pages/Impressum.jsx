@@ -1,85 +1,31 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "../ThemeContext";
+// src/pages/Impressum.jsx
+import React from "react";
 
-export default function Impressum() {
-  const { dark } = useContext(ThemeContext);
-
-  const style = {
-    maxWidth: "900px",
-    margin: "50px auto",
-    padding: "20px",
-    lineHeight: "1.7",
-    color: dark ? "#fff" : "#000"
-  };
-
+function Impressum() {
   return (
-    <div style={style}>
+    <div style={{ maxWidth: "900px", margin: "40px auto", padding: "0 20px" }}>
       <h1>Impressum</h1>
-
-      <h2>Angaben gemäß § 5 TMG</h2>
       <p>
-        Jens Bormann<br />
-        Rumpfstraße 4<br />
-        99986 Niederdorla
+        Angaben gemäß § 5 TMG
+        <br />
+        (Hier deine Anschrift / Verantwortliche Person eintragen)
       </p>
-
       <h2>Kontakt</h2>
       <p>
-        Telefon: (keine Angabe)<br />
-        E-Mail: jenbor80@gmail.com
+        E-Mail: <a href="mailto:deine-adresse@example.com">deine-adresse@example.com</a>
       </p>
-
-      <h2>Haftung für Inhalte</h2>
+      <h2>Haftungsausschluss</h2>
       <p>
-        Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf
-        diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis
-        10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
-        übermittelte oder gespeicherte fremde Informationen zu überwachen oder
-        nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit
-        hinweisen.
+        Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit,
+        Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
       </p>
       <p>
-        Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen
-        nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine
-        diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis
-        einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von
-        entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend
-        entfernen.
-      </p>
-
-      <h2>Haftung für Links</h2>
-      <p>
-        Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte
-        wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte
-        auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist
-        stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
-      </p>
-      <p>
-        Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche
-        Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der
-        Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der
-        verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer
-        Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen
-        werden wir derartige Links umgehend entfernen.
-      </p>
-
-      <h2>Urheberrecht</h2>
-      <p>
-        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen
-        Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als
-        solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und
-        jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes
-        bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw.
-        Erstellers.
-      </p>
-      <p>
-        Downloads und Kopien dieser Seite sind nur für den privaten, nicht
-        kommerziellen Gebrauch gestattet.
-      </p>
-
-      <p style={{ marginTop: "40px", opacity: 0.7, fontSize: "14px" }}>
-        Quelle: <a href="https://www.e-recht24.de" target="_blank" rel="noopener noreferrer">e-recht24.de</a>
+        Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte
+        externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber
+        verantwortlich.
       </p>
     </div>
   );
 }
+
+export default Impressum;
