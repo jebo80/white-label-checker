@@ -87,6 +87,71 @@
 
 
 /* ============================
+   DETAIL VIEW
+============================ */
+.detail-view {
+  max-width: 900px;
+  margin: 40px auto;
+  background: var(--card-bg);
+  padding: 26px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.detail-content {
+  display: flex;
+  gap: 30px;
+}
+
+.detail-image img {
+  width: 260px;
+  height: 260px;
+  object-fit: contain;
+}
+
+.detail-info h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.detail-brand {
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.detail-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 16px 0;
+}
+
+.detail-amazon-btn {
+  display: inline-block;
+  padding: 12px 22px;
+  background: #f7a600;
+  border-radius: var(--radius);
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.detail-amazon-btn:hover {
+  background: #ffb72b;
+}
+
+
+/* ============================
    PRODUCT GRID
 ============================ */
 .results-section {
@@ -159,14 +224,14 @@
   text-align: center;
 }
 
-/* FIX: Titel immer exakt 2 Zeilen hoch */
+/* Titel immer fix 2 Zeilen */
 .card-title {
   font-size: 1rem;
   font-weight: 600;
   color: var(--text);
   line-height: 1.35;
 
-  height: 2.7rem;         /* genau 2 Zeilen */
+  height: 2.7rem; /* exakt 2 Zeilen */
   overflow: hidden;
 
   display: -webkit-box;
@@ -186,22 +251,24 @@
   font-weight: 700;
   color: var(--text);
   text-align: center;
-  padding: 10px 0;
-  margin-top: auto;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
 }
 
 
 /* ============================
-   BUTTON-BLOCK
+   UNTERER BLOCK — NEU (grau)
 ============================ */
-.card-buttons {
+.card-lower {
+  background: var(--bg-alt);
+  padding: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 18px;
+  gap: 10px;
 }
 
+/* Buttons */
 .details-btn,
 .amazon-btn-small {
   width: 75%;
@@ -215,15 +282,15 @@
 /* DETAILS – Blau */
 .details-btn {
   background: var(--primary);
-  border: none;
   color: #fff;
+  border: none;
 }
 
 .details-btn:hover {
   background: var(--primary-dark);
 }
 
-/* AMAZON — Orange */
+/* AMAZON – Orange */
 .amazon-btn-small {
   background: #f7a600;
   border: 1px solid #d68a00;
