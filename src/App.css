@@ -143,3 +143,12 @@ body {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
+
+/* HERO Fix für Darkmode */
+body.dark .hero-title {
+  color: #e5e7eb;
+}
+
+body.dark .hero-subtitle {
+  color: #9ca3af;
+}
