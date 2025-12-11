@@ -1,113 +1,132 @@
 // src/pages/Home.jsx
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { searchAmazonMock } from "../api/mockAmazon";
-import { ThemeContext } from "../ThemeContext";
-import "./Home.css";
 
-export default function Home() {
-  const { dark } = useContext(ThemeContext);
-
+function Home() {
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState([]);
-  const [hideWL, setHideWL] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  function isWhiteLabel(name) {
-    if (!name) return false;
-    const weird = /[bcdfghjklmnpqrstvwxyz]{4,}/i.test(name);
-    const hasNum = /\d/.test(name);
-    return weird || hasNum;
-  }
-
-  async function handleSearch(e) {
-    if (e) e.preventDefault();
-    setLoading(true);
+  const handleSearch = async () => {
     const results = await searchAmazonMock(query);
     setProducts(results);
-    setLoading(false);
-  }
+    setSelectedProduct(null);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleSearch();
+  };
+
+  const showWelcome = products.length === 0 && !selectedProduct;
 
   return (
-    <div className={`home-page ${dark ? "dark" : ""}`}>
+    <div className="home-wrapper">
       {/* HERO */}
       <section className="hero">
-        <h1>SiebMalDurch</h1>
-        <p className="subtitle">
-          Finde echte Markenprodukte – und filtere No-Name-Artikel aus China.
+        <h1 className="hero-title">Finde echte Markenprodukte.</h1>
+        <p className="hero-subtitle">
+          SiebMalDurch hilft dir, verdächtige White-Label-Produkte schnell zu erkennen.
         </p>
 
-        <form className="search-bar" onSubmit={handleSearch}>
+        <div className="hero-search">
           <input
+            type="text"
+            placeholder="Produkt suchen..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Amazon Produkt suchen..."
+            onKeyDown={handleKeyDown}
           />
-          <button type="submit">Suchen</button>
-        </form>
+          <button onClick={handleSearch}>Suchen</button>
+        </div>
       </section>
 
-      {/* Erweiterte Erklärung */}
-      <section className="explain">
-        Viele Amazon-Produkte kommen aus denselben Fabriken und werden nur
-        umbenannt. SiebMalDurch zeigt dir solche Produkte – oder blendet sie auf Wunsch aus.
-      </section>
+      {/* WELCOME BOX */}
+      {showWelcome && (
+        <section className="welcome-box">
+          <h2>Willkommen bei SiebMalDurch</h2>
+          <p>
+            Dieses Tool analysiert Online-Produkte und zeigt dir, ob der Markenname ungewöhnlich wirkt
+            oder Hinweise auf ein mögliches White-Label-Produkt bestehen.
+          </p>
 
-      {/* Filter */}
-      <div className="filter-row">
-        <label>
-          <input
-            type="checkbox"
-            checked={hideWL}
-            onChange={() => setHideWL(!hideWL)}
-          />
-          No-Name / White-Label ausblenden
-        </label>
+          <h3>Was bedeutet „White-Label“?</h3>
+          <p>
+            White-Label-Produkte sind Artikel von anonymen Herstellern, die unter Fantasienamen
+            verkauft werden. Sie können gut sein – aber oft fehlt Transparenz bei Herkunft und Marke.
+          </p>
+        </section>
+      )}
 
-        <span className="info-icon" onClick={() => setShowInfo(!showInfo)}>
-          i
-        </span>
-      </div>
+      {/* DETAIL-ANSICHT */}
+      {selectedProduct && (
+        <div className="detail-view">
+          <button className="back-button" onClick={() => setSelectedProduct(null)}>
+            ← Zurück zu den Ergebnissen
+          </button>
 
-      {showInfo && (
-        <div className="info-popup">
-          <strong>Was sind No-Name / White-Label-Produkte?</strong>
-          <br />
-          <br />
-          Produkte, die aus derselben Fabrik stammen und nur andere Fantasienamen tragen.
-          <br />
-          <br />
-          <button onClick={() => setShowInfo(false)}>Schließen</button>
+          <div className="detail-content">
+            <div className="detail-image">
+              <img src={selectedProduct.image} alt={selectedProduct.title} />
+            </div>
+
+            <div className="detail-info">
+              <h2>{selectedProduct.title}</h2>
+              <p className="detail-brand">{selectedProduct.brand}</p>
+              <p className="detail-price">{selectedProduct.price} €</p>
+
+              <a
+                href={selectedProduct.url}
+                target="_blank"
+                rel="noreferrer"
+                className="detail-amazon-btn"
+              >
+                Auf Amazon ansehen →
+              </a>
+            </div>
+          </div>
         </div>
       )}
 
-      {/* Ergebnisse */}
-      {loading && <p className="loading">Suche läuft...</p>}
+      {/* PRODUKT-GRID */}
+      {!selectedProduct && (
+        <section className="results-section">
+          <div className="product-grid">
+            {products.map((p, idx) => (
+              <div key={idx} className="product-card">
+                {p.isWhiteLabel && <div className="wl-badge">Verdacht</div>}
 
-      <div className="product-grid">
-        {products
-          .filter((p) => !hideWL || !isWhiteLabel(p.brand))
-          .map((p, i) => (
-            <div key={i} className="product-card">
-              {isWhiteLabel(p.brand) && <div className="wl-badge">WL</div>}
+                <div
+                  className="card-image-wrapper"
+                  onClick={() => setSelectedProduct(p)}
+                >
+                  <img src={p.image} alt={p.title} />
+                  <div className="image-hint">Für Details bitte aufs Bild klicken</div>
+                </div>
 
-              <img src={p.image} alt={p.title} />
+                <div className="card-content">
+                  <h3 className="card-title">{p.title}</h3>
+                  <p className="card-brand">{p.brand}</p>
+                </div>
 
-              <h3>{p.title}</h3>
-              <p className="brand">{p.brand}</p>
+                <div className="card-price">{p.price} €</div>
 
-              <p className="price">{p.price} €</p>
-
-              <a
-                href="https://www.amazon.de"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="amazon-card-btn">Auf Amazon ansehen</button>
-              </a>
-            </div>
-          ))}
-      </div>
+                <div className="card-lower">
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="amazon-btn-small"
+                  >
+                    Auf Amazon ansehen →
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
+
+export default Home;
