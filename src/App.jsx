@@ -18,60 +18,64 @@ function Header() {
   return (
     <header className="header">
 
-      {/* HEADER TOP ROW */}
-      <div className="header-top">
+      {/* TOP ROW */}
+      <div className="header-row">
 
-        {/* LEFT: LOGO + BRAND */}
+        {/* LEFT: Logo + Brand */}
         <div className="header-left">
           <div className="brand-logo"></div>
-
-          <div className="brand-text">
-            <Link to="/" className="brand">
-              Sieb<span className="brand-accent">Mal</span>Durch
-            </Link>
-            <span className="brand-sub">Finde echte Markenprodukte</span>
-          </div>
+          <Link to="/" className="brand">
+            Sieb<span className="brand-accent">Mal</span>Durch
+          </Link>
         </div>
 
-        {/* RIGHT: CONTROLS */}
-        <div className="header-controls">
+        {/* CENTER: Desktop Navigation */}
+        <nav className="nav-desktop">
+          <Link to="/">Startseite</Link>
+          <Link to="/info">Info</Link>
+          <Link to="/impressum">Impressum</Link>
+          <Link to="/datenschutz">Datenschutz</Link>
+        </nav>
 
-          {/* Amazon button now inside the top row (desktop fix) */}
+        {/* RIGHT: Amazon + Theme + Burger */}
+        <div className="header-right">
+
+          {/* Desktop Amazon Button */}
           <a
             href="https://www.amazon.de"
+            className="amazon-btn desktop-only"
             target="_blank"
             rel="noopener noreferrer"
-            className="amazon-btn header-amazon-btn"
           >
             Amazon
           </a>
 
-          {/* Theme toggle */}
+          {/* Theme */}
           <button className="theme-btn" onClick={toggleTheme}>
             {theme === "light" ? "🌙" : "☀️"}
           </button>
 
-          {/* Burger menu toggle */}
-          <button className="burger-btn" onClick={toggleMenu}>
+          {/* Mobile Burger */}
+          <button className="burger-btn mobile-only" onClick={toggleMenu}>
             ☰
           </button>
-        </div>
 
+        </div>
       </div>
 
-      {/* MOBILE-ONLY Amazon row — only visible on small screens */}
-      <div className="mobile-amazon-row">
+      {/* Mobile Amazon */}
+      <div className="mobile-amazon-row mobile-only">
         <a
           href="https://www.amazon.de"
+          className="amazon-btn"
           target="_blank"
           rel="noopener noreferrer"
-          className="amazon-btn"
         >
           Amazon
         </a>
       </div>
 
-      {/* SLIDE-DOWN MENU */}
+      {/* Mobile Menu */}
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <nav className="mobile-nav">
           <Link to="/" onClick={() => setMenuOpen(false)}>Startseite</Link>
