@@ -1,7 +1,6 @@
 /* ROOT */
 .home-page {
   padding-top: 40px; /* Abstand zum Header */
-  min-height: 100vh;
   color: var(--text);
 }
 
