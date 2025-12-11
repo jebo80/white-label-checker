@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { searchAmazonMock } from "../api/mockAmazon";
-import { useTheme } from "../ThemeContext";
 import "./Home.css";
 
 function Home() {
@@ -16,14 +15,16 @@ function Home() {
     if (e.key === "Enter") handleSearch();
   };
 
+  const showWelcome = products.length === 0;
+
   return (
     <div className="home-wrapper">
 
-      {/* HERO-BEREICH */}
+      {/* HERO */}
       <section className="hero">
         <h1 className="hero-title">Finde echte Markenprodukte.</h1>
         <p className="hero-subtitle">
-          SiebMalDurch zeigt dir, was seriös wirkt – und was White-Label sein könnte.
+          SiebMalDurch hilft dir, verdächtige White-Label-Produkte schnell zu erkennen.
         </p>
 
         <div className="hero-search">
@@ -38,7 +39,24 @@ function Home() {
         </div>
       </section>
 
-      {/* PRODUKTE */}
+      {/* WILLKOMMEN – Nur sichtbar wenn keine Ergebnisse */}
+      {showWelcome && (
+        <section className="welcome-box">
+          <h2>Willkommen bei SiebMalDurch</h2>
+          <p>
+            Dieses Tool analysiert Online-Produkte und zeigt dir, ob der Markenname
+            ungewöhnlich wirkt oder Hinweise auf ein White-Label-Produkt bestehen.
+          </p>
+
+          <h3>Was bedeutet „White-Label“?</h3>
+          <p>
+            White-Label-Produkte sind Artikel von anonymen Herstellern, die unter
+            Fantasienamen verkauft werden. Sie sehen wie Markenprodukte aus – sind es aber oft nicht.
+          </p>
+        </section>
+      )}
+
+      {/* PRODUKTERGEBNISSE */}
       <div className="results-section">
         <div className="product-grid">
           {products.map((p, index) => (
